@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMLC — From Template Trap to Taste-Level Branding · Case Study</title>
+<meta name="description" content="A product design case study on transforming Harsh Mann Luxury Consultancy's digital presence from a generic purple-gold template into a restraint-driven, portfolio-first luxury website.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;600;700&family=Spline+Sans+Mono:wght@400;500;600&family=Spline+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root {
+  --paper:#FBFAF4; --paper-2:#F4F2E9; --dot:#E3DECF;
+  --ink:#222019; --ink-soft:#403C32; --muted:#74705F; --line:#D8D3C3;
+  --accent:#C4973F;        /* warm gold — nods to HMLC luxury */
+  --accent-soft:#FDF5E6;
+  --hl:#FFE89B;
+  --d-ink:#1b1b1f;
+  --d-blue:#1971c2;  --f-blue:#a5d8ff;
+  --d-green:#2f9e44; --f-green:#b2f2bb;
+  --d-red:#e03131;   --f-red:#ffc9c9;
+  --d-orange:#e8590c;--f-orange:#ffd8a8;
+  --d-violet:#6741d9;--f-violet:#d0bfff;
+  --d-yellow:#f08c00;
+  --maxw:1120px; --col:720px; --r:14px;
+  --shadow:0 1px 0 rgba(34,32,25,.04),0 18px 40px -28px rgba(34,32,25,.45);
+  --font-disp:"Bricolage Grotesque",system-ui,sans-serif;
+  --font-body:"Spline Sans",system-ui,sans-serif;
+  --font-mono:"Spline Sans Mono",ui-monospace,monospace;
+  --font-hand:"Caveat",ui-rounded,cursive;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; font-family:var(--font-body); color:var(--ink);
+  background-color:var(--paper);
+  background-image:radial-gradient(var(--dot) 1.35px,transparent 1.4px);
+  background-size:26px 26px; background-position:-13px -13px;
+  line-height:1.62; font-size:18px;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+::selection{background:var(--hl);color:var(--ink)}
+img{max-width:100%}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* ===== LAYOUT ===== */
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+.col{max-width:var(--col);margin-inline:auto}
+.sec{padding-block:clamp(32px,5vw,64px);position:relative}
+.sec--tight{padding-block:clamp(20px,3.2vw,40px)}
+
+/* ===== TYPE ===== */
+.eyebrow{font-family:var(--font-hand);font-size:26px;font-weight:700;color:var(--accent);transform:rotate(-2deg);display:inline-block;margin:0 0 6px;line-height:1}
+.kicker{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:2px;background:var(--ink);border-radius:2px;display:inline-block}
+h1,h2,h3{font-family:var(--font-disp);font-weight:700;line-height:1.04;letter-spacing:-.02em;color:var(--ink);margin:0}
+h1{font-size:clamp(40px,7.2vw,80px);font-weight:800;letter-spacing:-.035em}
+h2{font-size:clamp(28px,4.4vw,46px);margin:0 0 .4em}
+h3{font-size:clamp(20px,2.6vw,27px);letter-spacing:-.015em;margin:0 0 .28em}
+p{margin:0 0 .85em;color:var(--ink-soft)}
+.lead{font-size:clamp(20px,2.5vw,24px);line-height:1.5;color:var(--ink);font-weight:400}
+.small{font-size:15px;color:var(--muted)}
+strong{font-weight:600;color:var(--ink)}
+.hl{background:linear-gradient(180deg,transparent 58%,var(--hl) 58% 92%,transparent 92%);padding:0 .08em}
+.hand-note{font-family:var(--font-hand);font-size:23px;color:var(--accent);line-height:1.25}
+ul.clean{margin:0 0 1.1em;padding:0;list-style:none}
+ul.clean li{position:relative;padding-left:30px;margin-bottom:.62em;color:var(--ink-soft)}
+ul.clean li::before{content:"";position:absolute;left:2px;top:.62em;width:11px;height:11px;border:2.4px solid var(--ink);border-radius:3px 9px 4px 8px;transform:rotate(-6deg)}
+ul.clean li b{color:var(--ink);font-weight:600}
+
+/* ===== CHIPS ===== */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.chip{font-family:var(--font-mono);font-size:12.5px;font-weight:500;color:var(--ink-soft);background:var(--paper);border:1.6px solid var(--ink);border-radius:999px;padding:7px 14px;line-height:1;letter-spacing:.01em;box-shadow:2px 2px 0 rgba(34,32,25,.9)}
+.chip span{color:var(--muted);text-transform:uppercase;font-size:10.5px;letter-spacing:.12em;margin-right:7px}
+
+/* ===== DIVIDER ===== */
+.rule{display:block;width:100%;height:18px;color:var(--line);margin:8px auto}
+.rule svg{display:block;width:100%;height:100%}
+
+/* ===== FIGURE ===== */
+.fig{margin:22px auto;max-width:980px}
+.fig--full{max-width:1080px}
+.fig__frame{position:relative;background:#fff;border:2px solid var(--ink);border-radius:var(--r);box-shadow:6px 6px 0 rgba(34,32,25,.92);padding:18px}
+.fig__frame::before{content:"";position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-1.5deg);width:118px;height:26px;background:rgba(255,232,155,.72);border:1px dashed rgba(34,32,25,.25);border-radius:2px}
+.fig__frame svg.sketch{display:block;width:100%;height:auto}
+.fig__cap{margin:14px 4px 0;display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.fig__cap .t{max-width:62ch}
+.fig__cap .lbl{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 3px}
+.fig__cap .d{font-size:14.5px;color:var(--muted);margin:0;line-height:1.5}
+
+/* ===== BROWSER SCREENS ===== */
+.browsers{display:grid;grid-template-columns:1fr;gap:20px;margin:20px auto;max-width:980px}
+
+/* ===== CARDS ===== */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:18px auto;max-width:900px}
+.card{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:20px 22px;box-shadow:5px 5px 0 rgba(34,32,25,.9);position:relative}
+.card:nth-child(2n){transform:rotate(.5deg)}
+.card:nth-child(3n){transform:rotate(-.6deg)}
+.card .n{font-family:var(--font-hand);font-size:30px;font-weight:700;color:var(--accent);line-height:1;display:block;margin-bottom:6px}
+.card h4{font-family:var(--font-disp);font-weight:700;font-size:18.5px;margin:0 0 6px;letter-spacing:-.01em}
+.card p{font-size:15.5px;margin:0;color:var(--ink-soft)}
+
+/* ===== CALLOUT ===== */
+.callout{border:2px dashed var(--ink);border-radius:14px;background:var(--paper-2);padding:18px 24px;margin:18px auto;max-width:760px;position:relative}
+.callout .tag{position:absolute;top:-14px;left:22px;background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:5px 11px;border-radius:7px;font-weight:600}
+.callout p:last-child{margin-bottom:0}
+.callout .big{font-family:var(--font-hand);font-size:clamp(26px,4vw,38px);color:var(--ink);line-height:1.18;font-weight:700;margin:6px 0 0}
+
+/* ===== PRINCIPLES ===== */
+.princ{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px auto;max-width:920px}
+.princ .p{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:18px;box-shadow:4px 4px 0 rgba(34,32,25,.9)}
+.princ .p .ix{font-family:var(--font-hand);font-size:34px;font-weight:700;color:var(--accent);line-height:.9}
+.princ .p h4{font-family:var(--font-disp);font-size:18px;font-weight:700;margin:8px 0 5px}
+.princ .p p{font-size:14.5px;margin:0;color:var(--ink-soft)}
+
+/* ===== BENTO GRID (21st.dev-inspired) ===== */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px auto;max-width:980px}
+.bc{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:20px;box-shadow:4px 4px 0 rgba(34,32,25,.9)}
+.bc.s2{grid-column:span 2}.bc.s3{grid-column:span 3}.bc.s4{grid-column:span 4}
+.bc .bl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.bc .bv{font-family:var(--font-disp);font-weight:800;font-size:clamp(28px,3.6vw,42px);letter-spacing:-.03em;color:var(--ink);line-height:1}
+.bc .bs{font-size:14px;color:var(--muted);margin-top:6px}
+.bc.dark{background:var(--ink);border-color:var(--ink)}
+.bc.dark .bl{color:rgba(251,250,244,.45)}
+.bc.dark .bv{color:var(--accent)}
+.bc.dark .bs{color:rgba(251,250,244,.55)}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{padding:18px 0 24px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.t-eyebrow{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.testimonials h2{font-family:var(--font-disp);font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:700;color:var(--ink);text-align:center;margin:0}
+.testimonials .t-sub{font-family:var(--font-hand);font-size:1.15rem;color:var(--muted);text-align:center;margin-bottom:20px}
+.dc-wrap{display:grid;grid-template-areas:'stack';place-items:center;height:640px;width:min(960px,calc(100vw - 48px))}
+.dc{grid-area:stack;position:relative;width:38rem;height:18rem;border-radius:var(--r);border:2px solid var(--line);background:var(--paper-2);padding:28px 34px;display:flex;flex-direction:column;justify-content:space-between;transform:skewY(-8deg);transition:transform .5s cubic-bezier(.22,.68,0,1.2),border-color .4s ease,filter .4s ease,background .4s ease,box-shadow .4s ease;cursor:default;user-select:none;z-index:0}
+.dc::after{content:'';position:absolute;right:-4px;top:-5%;height:110%;width:7rem;background:linear-gradient(to left,var(--paper),transparent);pointer-events:none;border-radius:var(--r);transition:opacity .35s ease}
+.dc:nth-child(1){filter:grayscale(100%)}
+.dc:nth-child(2){filter:grayscale(100%);transform:skewY(-8deg) translate(68px,52px)}
+.dc:nth-child(3){transform:skewY(-8deg) translate(136px,104px)}
+.dc:nth-child(1):hover{filter:grayscale(0%);transform:skewY(-8deg) translateY(-160px);border-color:var(--accent);background:var(--accent-soft);box-shadow:0 28px 56px rgba(196,151,63,.18);z-index:10}
+.dc:nth-child(2):hover{filter:grayscale(0%);transform:skewY(-8deg) translate(68px,-120px);border-color:var(--accent);background:var(--accent-soft);box-shadow:0 28px 56px rgba(196,151,63,.18);z-index:10}
+.dc:nth-child(3):hover{transform:skewY(-8deg) translate(136px,30px);border-color:var(--accent);background:var(--accent-soft);box-shadow:0 28px 56px rgba(196,151,63,.18);z-index:10}
+.dc:hover::after{opacity:0}
+.dc-wrap:has(.dc:nth-child(1):hover) .dc:nth-child(2){transform:skewY(-8deg) translate(68px,160px)}
+.dc-wrap:has(.dc:nth-child(1):hover) .dc:nth-child(3){transform:skewY(-8deg) translate(136px,220px)}
+.dc-wrap:has(.dc:nth-child(2):hover) .dc:nth-child(3){transform:skewY(-8deg) translate(136px,220px)}
+.dc-top{display:flex;align-items:center;gap:10px}
+.dc-icon{display:inline-flex;padding:7px;border-radius:999px;background:var(--accent-soft);flex-shrink:0}
+.dc-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dc-title{font-family:var(--font-disp);font-size:1.35rem;font-weight:600;color:var(--accent)}
+.dc-quote{font-family:var(--font-hand);font-size:1.65rem;color:var(--ink-soft);line-height:1.45}
+.dc-meta{font-family:var(--font-mono);font-size:.88rem;color:var(--muted)}
+
+/* ===== MARQUEE (ReactBits-inspired) ===== */
+.mq{overflow:hidden;background:var(--ink);padding:13px 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.mq-track{display:flex;width:max-content;animation:mq-run 34s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+.mq-item{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,250,244,.55);padding:0 28px;white-space:nowrap}
+.mq-dot{color:var(--accent);font-size:16px;padding:0 4px;align-self:center}
+@keyframes mq-run{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== HERO ===== */
+.hero{padding-top:clamp(24px,4vw,48px);padding-bottom:clamp(12px,2vw,20px)}
+.hero .tagline{font-family:var(--font-hand);font-size:clamp(24px,3.2vw,32px);color:var(--accent);transform:rotate(-1.5deg);display:inline-block;margin-bottom:10px}
+.hero h1{margin-bottom:22px;max-width:17ch}
+.hero .sub{font-size:clamp(19px,2.3vw,23px);color:var(--ink-soft);max-width:54ch;line-height:1.5;margin-bottom:26px}
+
+/* ===== DUO ===== */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:34px;max-width:900px;margin-inline:auto}
+
+/* ===== TOPBAR ===== */
+.top{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1) blur(6px);background:rgba(251,250,244,.82);border-bottom:1.6px solid var(--line)}
+.top .row{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brandmark{display:flex;align-items:center;gap:10px;font-family:var(--font-disp);font-weight:800;font-size:18px;letter-spacing:-.02em}
+.brandmark svg{width:26px;height:26px;flex:0 0 26px}
+.top nav{display:flex;gap:22px}
+.top nav a{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase}
+.top nav a:hover{color:var(--accent);text-decoration:none}
+.badge-concept{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1.4px solid var(--line);border-radius:999px;padding:5px 11px}
+
+/* ===== FOOTER ===== */
+footer{border-top:2px solid var(--ink);margin-top:40px;background:var(--paper-2)}
+footer .wrap{padding-block:48px}
+footer .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:40px}
+footer h5{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:600}
+footer p{font-size:15px;color:var(--ink-soft)}
+footer .sig{font-family:var(--font-hand);font-size:30px;color:var(--ink);font-weight:700;transform:rotate(-2deg)}
+
+/* ===== MOTION ===== */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.sketch .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:none}
+.sketch.in .draw{animation:draw 1.1s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:880px){
+  body{font-size:17px}
+  .cards{grid-template-columns:1fr;max-width:480px}
+  .princ{grid-template-columns:1fr;max-width:480px}
+  .duo{grid-template-columns:1fr;gap:8px}
+  footer .grid{grid-template-columns:1fr;gap:24px}
+  .top nav{display:none}
+  .fig__cap{flex-direction:column}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bc.s3,.bc.s4{grid-column:span 2}
+  .dc-wrap{height:480px}
+  .dc{width:min(80vw,26rem);height:16rem;padding:22px 26px}
+  .dc:nth-child(2){transform:skewY(-8deg) translate(44px,44px)}
+  .dc:nth-child(3){transform:skewY(-8deg) translate(88px,88px)}
+  .dc-quote{font-size:1.35rem}
+}
+@media(max-width:600px){
+  .dc-wrap{display:flex;flex-direction:column;height:auto;gap:14px;width:calc(100vw - 32px);padding:16px 0 8px}
+  .dc{width:100%;height:auto;min-height:10rem;padding:20px 22px;transform:none !important;filter:grayscale(0%) !important}
+  .dc::after{display:none}
+  .dc:nth-child(1):hover,.dc:nth-child(2):hover,.dc:nth-child(3):hover{transform:translateY(-8px) !important;box-shadow:0 12px 28px rgba(196,151,63,.14)}
+  .dc-wrap:has(.dc:nth-child(1):hover) .dc:nth-child(2),
+  .dc-wrap:has(.dc:nth-child(1):hover) .dc:nth-child(3),
+  .dc-wrap:has(.dc:nth-child(2):hover) .dc:nth-child(3){transform:none !important}
+  .bento{grid-template-columns:1fr}
+  .bc.s2,.bc.s3,.bc.s4{grid-column:span 1}
+}
+@media(max-width:460px){.fig__frame{padding:12px}}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .sketch .draw{stroke-dashoffset:0;animation:none}
+  .mq-track{animation:none}
+}
+@media print{.top,.mq,.badge-concept{display:none}body{background:#fff}.fig__frame,.card,.bc{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<header class="top">
+  <div class="wrap row">
+    <div class="brandmark">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="4" y="4" width="32" height="32" rx="8" fill="#C4973F"/>
+        <text x="20" y="26" font-family="serif" font-size="18" font-weight="700" fill="#fff" text-anchor="middle">H</text>
+      </svg>
+      <span>HMLC · Case Study</span>
+    </div>
+    <nav>
+      <a href="#problem">Problem</a>
+      <a href="#research">Research</a>
+      <a href="#redesign">Redesign</a>
+      <a href="#impact">Impact</a>
+    </nav>
+    <span class="badge-concept">Concept study</span>
+  </div>
+</header>
+
+<main id="case">
+
+<!-- ===== HERO ===== -->
+<section class="sec hero">
+  <div class="wrap col">
+    <span class="tagline">a brand identity case study</span>
+    <h1>From the template trap to taste&#8209;level branding.</h1>
+    <p class="sub">Reimagining <strong>HMLC</strong> — Harsh Mann Luxury Consultancy — from a purple&#8209;and&#8209;gold generic template into a restraint&#8209;driven, portfolio&#8209;first digital presence that actually communicates what luxury looks like.</p>
+    <div class="chips">
+      <span class="chip"><span>Role</span>Lead Brand + Web Designer</span>
+      <span class="chip"><span>Scope</span>0→1 rebrand · IA · visual system · web</span>
+      <span class="chip"><span>Team</span>1 designer, 1 strategist, 1 dev</span>
+      <span class="chip"><span>Surface</span>Desktop &amp; Mobile</span>
+      <span class="chip"><span>Year</span>12 wks · concept study</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="fig fig--full" data-name="hmlc-hero-before-after">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 20 1080 286" role="img" aria-label="Left: the redesigned minimal HMLC site — restraint, bold type, portfolio above the fold. Right: the purple-and-gold template it replaced.">
+          <!-- LEFT LAPTOP: AFTER (current hmluxuryconsultancy.com) -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="52" y="48" width="340" height="222" rx="10" fill="white"/>
+            <path d="M40 270 L52 270 L52 48 L392 48 L392 270 L404 270 L428 286 L16 286 Z"/>
+            <line x1="16" y1="286" x2="428" y2="286" stroke-width="3"/>
+            <line x1="176" y1="270" x2="268" y2="270" stroke-width="5"/>
+          </g>
+          <!-- After screen content: clean minimal -->
+          <rect x="52" y="48" width="340" height="28" fill="white"/>
+          <line x1="52" y1="76" x2="392" y2="76" stroke="#e8e5e0" stroke-width="1.2"/>
+          <text x="68" y="66" font-family="Caveat,cursive" font-weight="700" font-size="11" fill="#1b1b1f">HMLC</text>
+          <text x="172" y="64" font-family="Spline Sans Mono,monospace" font-size="7" fill="#74705F" letter-spacing=".8">PORTFOLIO   SERVICES   ABOUT   BLOG   CONTACT</text>
+          <!-- Big clean headline -->
+          <line x1="68" y1="106" x2="374" y2="106" stroke="#1b1b1f" stroke-width="8"/>
+          <line x1="68" y1="122" x2="374" y2="122" stroke="#1b1b1f" stroke-width="8"/>
+          <line x1="68" y1="138" x2="292" y2="138" stroke="#1b1b1f" stroke-width="8"/>
+          <!-- Subtext -->
+          <line x1="68" y1="158" x2="272" y2="158" stroke="#d8d3c3" stroke-width="3"/>
+          <line x1="68" y1="168" x2="232" y2="168" stroke="#d8d3c3" stroke-width="3"/>
+          <!-- CTA: single clean button -->
+          <rect x="68" y="182" width="116" height="24" rx="12" fill="#1b1b1f"/>
+          <text x="126" y="197" font-family="Caveat,cursive" font-size="11" fill="white" text-anchor="middle">View Our Work</text>
+          <!-- Portfolio grid preview -->
+          <rect x="68" y="218" width="148" height="46" rx="4" fill="#1b1b1f"/>
+          <rect x="226" y="218" width="148" height="46" rx="4" fill="url(#hk)"/>
+          <text x="142" y="245" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(251,250,244,.5)" text-anchor="middle" letter-spacing="1">AAHANA</text>
+          <text x="300" y="245" font-family="Spline Sans Mono,monospace" font-size="7" fill="#74705F" text-anchor="middle" letter-spacing="1">SLOOP</text>
+
+          <!-- Red "BEFORE" label -->
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2.2"><rect x="206" y="32" width="90" height="26" rx="7" transform="rotate(-3 251 45)"/></g>
+          <text x="251" y="49" font-family="Caveat,cursive" font-weight="700" font-size="18" fill="#e03131" text-anchor="middle" transform="rotate(-3 251 45)">BEFORE</text>
+
+          <!-- ARROW (pointing from LEFT/before to RIGHT/after) -->
+          <g filter="url(#rough)" fill="none" stroke="#C4973F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+            <path class="draw" d="M452 228 C540 196 598 196 688 232"/>
+            <path d="M688 232 l-24 -14 M688 232 l-20 20"/>
+          </g>
+          <text x="570" y="200" font-family="Caveat,cursive" font-weight="700" font-size="28" fill="#C4973F" text-anchor="middle" transform="rotate(-5 570 200)">rebrand</text>
+          <text x="570" y="278" font-family="Spline Sans Mono,monospace" font-size="10" letter-spacing="2" fill="#74705F" text-anchor="middle">RESTRAINT &amp; CLARITY</text>
+
+          <!-- RIGHT LAPTOP: AFTER (purple-gold direction) -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="700" y="48" width="340" height="222" rx="10" fill="white"/>
+            <path d="M688 270 L700 270 L700 48 L1040 48 L1040 270 L1052 270 L1076 286 L664 286 Z"/>
+            <line x1="664" y1="286" x2="1076" y2="286" stroke-width="3"/>
+            <line x1="824" y1="270" x2="916" y2="270" stroke-width="5"/>
+          </g>
+          <!-- Before screen content: purple/gold clutter -->
+          <rect x="700" y="48" width="340" height="30" fill="url(#hv)"/>
+          <rect x="700" y="68" width="340" height="10" fill="url(#hv)"/>
+          <text x="720" y="68" font-family="Caveat,cursive" font-weight="700" font-size="12" fill="#fff">HMLC</text>
+          <text x="788" y="66" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing=".5">HOME · ABOUT · SERVICES · PORTFOLIO · BLOG · CONTACT · GET QUOTE</text>
+          <!-- Stock photo hero -->
+          <rect x="700" y="78" width="340" height="100" fill="url(#hk)"/>
+          <text x="870" y="112" font-family="Caveat,cursive" font-weight="700" font-size="20" fill="#D4AF37" text-anchor="middle">ELEVATE YOUR BRAND</text>
+          <text x="870" y="132" font-family="Caveat,cursive" font-weight="700" font-size="15" fill="#D4AF37" text-anchor="middle">TO LUXURY STATUS</text>
+          <rect x="790" y="148" width="160" height="20" rx="3" fill="#D4AF37"/>
+          <text x="870" y="161" font-family="Caveat,cursive" font-weight="700" font-size="10" fill="#1b1b1f" text-anchor="middle">✨ DISCOVER LUXURY ✨</text>
+          <!-- Services -->
+          <rect x="700" y="178" width="340" height="16" fill="url(#hv)" opacity=".5"/>
+          <text x="870" y="190" font-family="Spline Sans Mono,monospace" font-size="7" fill="white" text-anchor="middle" letter-spacing="1">INDIA'S PREMIER LUXURY BRANDING AGENCY</text>
+          <text x="734" y="214" font-family="Caveat,cursive" font-size="10" fill="#1b1b1f" text-anchor="middle">Our Services</text>
+          <circle cx="744" cy="232" r="14" fill="url(#hy)" stroke="#1b1b1f" stroke-width="1.2"/>
+          <circle cx="870" cy="232" r="14" fill="url(#hy)" stroke="#1b1b1f" stroke-width="1.2"/>
+          <circle cx="996" cy="232" r="14" fill="url(#hy)" stroke="#1b1b1f" stroke-width="1.2"/>
+          <text x="744" y="236" font-family="Caveat,cursive" font-size="11" text-anchor="middle" fill="#6741d9">♦</text>
+          <text x="870" y="236" font-family="Caveat,cursive" font-size="11" text-anchor="middle" fill="#6741d9">★</text>
+          <text x="996" y="236" font-family="Caveat,cursive" font-size="11" text-anchor="middle" fill="#6741d9">◆</text>
+          <line x1="712" y1="255" x2="776" y2="255" stroke="#d8d3c3" stroke-width="2.5"/>
+          <line x1="840" y1="255" x2="900" y2="255" stroke="#d8d3c3" stroke-width="2.5"/>
+          <line x1="966" y1="255" x2="1026" y2="255" stroke="#d8d3c3" stroke-width="2.5"/>
+
+          <!-- Green "AFTER" label -->
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2.2"><rect x="744" y="32" width="90" height="26" rx="7" transform="rotate(3 789 45)"/></g>
+          <text x="789" y="49" font-family="Caveat,cursive" font-weight="700" font-size="18" fill="#2f9e44" text-anchor="middle" transform="rotate(3 789 45)">AFTER</text>
+
+        </svg>
+      </div>
+      <div class="fig__cap">
+        <div class="t">
+          <p class="lbl">Fig. 00 · The thesis</p>
+          <p class="d">The entire project in one frame: replace purple gradients, gold clipart and a buried portfolio with restraint, bold typography, and work that does the selling. Every artifact below is drawn in the Excalidraw hand-sketch style and downloadable as SVG.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE (ReactBits-inspired) ===== -->
+<div class="mq" aria-hidden="true">
+  <div class="mq-track">
+    <span class="mq-item">branding</span><span class="mq-dot">·</span>
+    <span class="mq-item">restraint</span><span class="mq-dot">·</span>
+    <span class="mq-item">luxury</span><span class="mq-dot">·</span>
+    <span class="mq-item">identity</span><span class="mq-dot">·</span>
+    <span class="mq-item">clarity</span><span class="mq-dot">·</span>
+    <span class="mq-item">whitespace</span><span class="mq-dot">·</span>
+    <span class="mq-item">portfolio-first</span><span class="mq-dot">·</span>
+    <span class="mq-item">strategy</span><span class="mq-dot">·</span>
+    <span class="mq-item">taste</span><span class="mq-dot">·</span>
+    <span class="mq-item">authenticity</span><span class="mq-dot">·</span>
+    <span class="mq-item">vision</span><span class="mq-dot">·</span>
+    <span class="mq-item">positioning</span><span class="mq-dot">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="mq-item">branding</span><span class="mq-dot">·</span>
+    <span class="mq-item">restraint</span><span class="mq-dot">·</span>
+    <span class="mq-item">luxury</span><span class="mq-dot">·</span>
+    <span class="mq-item">identity</span><span class="mq-dot">·</span>
+    <span class="mq-item">clarity</span><span class="mq-dot">·</span>
+    <span class="mq-item">whitespace</span><span class="mq-dot">·</span>
+    <span class="mq-item">portfolio-first</span><span class="mq-dot">·</span>
+    <span class="mq-item">strategy</span><span class="mq-dot">·</span>
+    <span class="mq-item">taste</span><span class="mq-dot">·</span>
+    <span class="mq-item">authenticity</span><span class="mq-dot">·</span>
+    <span class="mq-item">vision</span><span class="mq-dot">·</span>
+    <span class="mq-item">positioning</span><span class="mq-dot">·</span>
+  </div>
+</div>
+
+<!-- ===== § 01 AT A GLANCE ===== -->
+<section class="sec sec--tight">
+  <div class="wrap col">
+    <p class="kicker">01 — At a glance</p>
+    <h2>A luxury branding agency whose website was doing the opposite of luxury.</h2>
+    <p class="lead">HMLC is Harsh Mann Luxury Consultancy — a boutique brand strategy and design agency that's built premium identities for the likes of BMW, ITC and Kotak. By every metric that matters, they were the right agency for a luxury brand to hire. Their website was not.</p>
+    <p>The original site leaned into the visual <em>shorthand</em> of luxury: purple gradients, gold drop-shadows, a Playfair Display headline in all-caps. It communicated "we want to look expensive" — which is precisely what a luxury brand avoids. Clients referred by word of mouth frequently mentioned the site felt like a mismatch. The work was world-class. The window was a chain store.</p>
+    <p>My remit: make the digital presence match the quality of the work — without adding features, and without a single decorative flourish the work couldn't justify.</p>
+    <div class="duo" style="margin-top:28px">
+      <div>
+        <h3>What I owned</h3>
+        <ul class="clean">
+          <li><b>Problem framing</b> &amp; the redesign strategy</li>
+          <li>Generative &amp; evaluative <b>research</b></li>
+          <li>Information architecture &amp; <b>navigation</b></li>
+          <li>Full <b>visual system</b> + component library</li>
+          <li>End-to-end <b>web design</b> (desktop + mobile)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>How I partnered</h3>
+        <ul class="clean">
+          <li>Harsh Mann on brand voice &amp; <b>positioning</b></li>
+          <li>Strategist on <b>competitive landscape</b></li>
+          <li>Dev on Webflow <b>feasibility &amp; animation</b></li>
+          <li>5 past clients on <b>discovery interviews</b></li>
+          <li>3 prospective clients on <b>first impressions</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== § 02 THE PROBLEM ===== -->
+<section class="sec" id="problem">
+  <div class="wrap col">
+    <span class="eyebrow">where the site failed</span>
+    <p class="kicker">02 — The problem</p>
+    <h2>A prospective luxury client decided to leave in under eight seconds. Here's the map of why.</h2>
+    <p class="lead">I rebuilt the first-visit journey end to end — from how a client discovered HMLC to the moment they either made contact or bounced. The emotion curve didn't dip gradually. It fell off a cliff at the second scroll.</p>
+    <p>Three moments did the damage: <strong>a hero that screamed "generic luxury template"</strong>, <strong>a portfolio buried three clicks deep</strong>, and <strong>a service list with no visual hierarchy</strong>. None of these are features. They're signals — and they were sending the wrong one.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="fig fig--full" data-name="hmlc-journey-before">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 1080 420" role="img" aria-label="Client emotional journey dropping sharply at the hero section, portfolio search and service page.">
+          <!-- axes -->
+          <g filter="url(#rough2)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round">
+            <line x1="70" y1="72" x2="70" y2="346" stroke-dasharray="2 7"/>
+            <circle cx="46" cy="86" r="15"/><path d="M39 90 q7 7 14 0"/>
+            <circle cx="46" cy="332" r="15"/><path d="M39 338 q7 -7 14 0"/>
+          </g>
+          <!-- frustration baseline -->
+          <g filter="url(#rough2)" fill="none" stroke="#e8590c" stroke-width="1.8"><line x1="98" y1="290" x2="1010" y2="290" stroke-dasharray="3 8"/></g>
+          <text x="1004" y="283" text-anchor="end" font-family="Spline Sans Mono,monospace" font-size="10" letter-spacing="1.5" fill="#e8590c">BOUNCE LINE</text>
+
+          <!-- emotion curve: starts curious, drops fast, never recovers -->
+          <g filter="url(#rough)" fill="none" stroke="#C4973F" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+            <path class="draw" d="M106 148 C180 142 210 158 274 162 C336 168 360 290 420 296 C480 302 512 260 568 264 C628 268 660 304 720 316 C780 328 822 348 880 352 C930 354 972 362 1010 366"/>
+          </g>
+          <!-- nodes -->
+          <g filter="url(#rough2)" fill="#fff" stroke="#1b1b1f" stroke-width="2.4">
+            <circle cx="106" cy="148" r="8"/>
+            <circle cx="274" cy="162" r="8"/>
+            <circle cx="420" cy="296" r="9" fill="url(#hr)"/>
+            <circle cx="568" cy="264" r="8"/>
+            <circle cx="720" cy="316" r="9" fill="url(#hr)"/>
+            <circle cx="880" cy="352" r="10" fill="url(#hr)"/>
+            <circle cx="1010" cy="366" r="10" fill="url(#hr)"/>
+          </g>
+          <!-- stage labels -->
+          <g font-family="Spline Sans Mono,monospace" font-size="11" fill="#403C32" text-anchor="middle">
+            <text x="106" y="392">Referral</text>
+            <text x="274" y="392">Homepage</text>
+            <text x="420" y="392" fill="#e03131">Hero scroll</text>
+            <text x="568" y="392">Find portfolio</text>
+            <text x="720" y="392" fill="#e03131">Services page</text>
+            <text x="880" y="392" fill="#e03131">Contact</text>
+            <text x="1010" y="392" fill="#e03131">Bounce</text>
+          </g>
+          <!-- pain bangs -->
+          <g font-family="Caveat,cursive" font-weight="700" fill="#e03131" text-anchor="middle">
+            <text x="438" y="272" font-size="32">!</text>
+            <text x="738" y="292" font-size="28">!</text>
+            <text x="1028" y="344" font-size="36">!</text>
+          </g>
+          <!-- sticky note 1 -->
+          <g filter="url(#rough2)" stroke="#1b1b1f" stroke-width="2"><rect x="334" y="72" width="196" height="52" rx="6" fill="url(#hy)" transform="rotate(-2 432 98)"/></g>
+          <text x="432" y="96" font-family="Caveat,cursive" font-size="17" fill="#1b1b1f" text-anchor="middle" transform="rotate(-2 432 98)">&ldquo;Looks like every</text>
+          <text x="432" y="114" font-family="Caveat,cursive" font-size="17" fill="#1b1b1f" text-anchor="middle" transform="rotate(-2 432 98)">other agency.&rdquo;</text>
+          <!-- sticky note 2 -->
+          <g filter="url(#rough2)" stroke="#1b1b1f" stroke-width="2"><rect x="640" y="88" width="210" height="52" rx="6" fill="url(#hy)" transform="rotate(1.5 745 114)"/></g>
+          <text x="745" y="112" font-family="Caveat,cursive" font-size="17" fill="#1b1b1f" text-anchor="middle" transform="rotate(1.5 745 114)">&ldquo;Where is their</text>
+          <text x="745" y="130" font-family="Caveat,cursive" font-size="17" fill="#1b1b1f" text-anchor="middle" transform="rotate(1.5 745 114)">actual work?&rdquo;</text>
+          <!-- sticky note 3 -->
+          <g filter="url(#rough2)" stroke="#1b1b1f" stroke-width="2"><rect x="870" y="174" width="160" height="44" rx="6" fill="url(#hr)" transform="rotate(-2 950 196)"/></g>
+          <text x="950" y="200" font-family="Caveat,cursive" font-weight="700" font-size="18" fill="#e03131" text-anchor="middle" transform="rotate(-2 950 196)">&ldquo;I'll look elsewhere.&rdquo;</text>
+        </svg>
+      </div>
+      <div class="fig__cap">
+        <div class="t">
+          <p class="lbl">Fig. 01 · Emotional journey, before</p>
+          <p class="d">Reconstructed from 5 prospect interviews and session recordings. Red nodes are below the bounce line. The cliff is the hero scroll — if the homepage doesn't signal taste in the first eight seconds, a prospective luxury client is already gone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== § 03 BEFORE SCREENS ===== -->
+<section class="sec sec--tight">
+  <div class="wrap col">
+    <p class="kicker">03 — The old site</p>
+    <h3>Three screens, three walls.</h3>
+    <p>Each drop-off moment had a screen behind it. Lo-fi on purpose — at this stage, the argument is about <strong>signal and hierarchy</strong>, not pixels.</p>
+  </div>
+
+  <div class="wrap browsers">
+
+    <!-- BEFORE 1: Homepage -->
+    <div class="fig" data-name="hmlc-before-01-homepage">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 880 420" role="img" aria-label="Old HMLC homepage with purple header, gold CTAs, stock photo hero and no visible portfolio.">
+          <!-- Browser chrome -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="6" width="590" height="408" rx="10" fill="white"/>
+            <rect x="6" y="6" width="590" height="36" rx="10" fill="url(#hk)"/>
+            <rect x="6" y="26" width="590" height="16" fill="url(#hk)"/>
+            <circle cx="26" cy="24" r="6" fill="url(#hr)"/>
+            <circle cx="46" cy="24" r="6" fill="url(#hy)"/>
+            <circle cx="66" cy="24" r="6" fill="url(#hg)"/>
+            <rect x="94" y="13" width="388" height="21" rx="10.5" fill="white"/>
+          </g>
+          <text x="288" y="27" font-family="Spline Sans Mono,monospace" font-size="8.5" fill="#74705F" text-anchor="middle">hmluxuryconsultancy.com</text>
+          <line x1="6" y1="42" x2="596" y2="42" stroke="#d8d3c3" stroke-width="1.2"/>
+          <!-- Purple nav header -->
+          <rect x="6" y="42" width="590" height="44" fill="url(#hv)"/>
+          <text x="30" y="68" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#fff">HMLC</text>
+          <text x="120" y="66" font-family="Spline Sans Mono,monospace" font-size="7.5" fill="rgba(255,255,255,.75)" letter-spacing=".5">HOME · ABOUT · SERVICES · PORTFOLIO · BLOG · CONTACT · GET QUOTE</text>
+          <rect x="488" y="52" width="96" height="20" rx="10" fill="#D4AF37"/>
+          <text x="536" y="66" font-family="Caveat,cursive" font-weight="700" font-size="10" fill="#1b1b1f" text-anchor="middle">GET QUOTE</text>
+          <!-- Stock photo hero -->
+          <rect x="6" y="86" width="590" height="124" fill="url(#hk)"/>
+          <text x="301" y="126" font-family="Caveat,cursive" font-weight="700" font-size="22" fill="#D4AF37" text-anchor="middle">ELEVATE YOUR BRAND</text>
+          <text x="301" y="150" font-family="Caveat,cursive" font-weight="700" font-size="17" fill="#D4AF37" text-anchor="middle">TO LUXURY STATUS</text>
+          <rect x="181" y="164" width="240" height="28" rx="4" fill="#D4AF37"/>
+          <text x="301" y="181" font-family="Caveat,cursive" font-weight="700" font-size="12" fill="#1b1b1f" text-anchor="middle">✨ DISCOVER LUXURY ✨</text>
+          <!-- Purple sub-band -->
+          <rect x="6" y="210" width="590" height="16" fill="url(#hv)" opacity=".55"/>
+          <text x="301" y="222" font-family="Spline Sans Mono,monospace" font-size="7" fill="white" text-anchor="middle" letter-spacing="1.5">INDIA'S PREMIER LUXURY BRANDING AGENCY · EST. 2019</text>
+          <!-- Services row: 3 gold boxes -->
+          <text x="301" y="250" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#1b1b1f" text-anchor="middle">Our Services</text>
+          <rect x="18" y="258" width="172" height="74" rx="5" fill="url(#hy)" stroke="#1b1b1f" stroke-width="1.3"/>
+          <rect x="203" y="258" width="172" height="74" rx="5" fill="url(#hy)" stroke="#1b1b1f" stroke-width="1.3"/>
+          <rect x="388" y="258" width="172" height="74" rx="5" fill="url(#hy)" stroke="#1b1b1f" stroke-width="1.3"/>
+          <text x="104" y="286" font-family="Caveat,cursive" font-size="18" text-anchor="middle" fill="#6741d9">♦</text>
+          <text x="289" y="286" font-family="Caveat,cursive" font-size="18" text-anchor="middle" fill="#6741d9">★</text>
+          <text x="474" y="286" font-family="Caveat,cursive" font-size="18" text-anchor="middle" fill="#6741d9">◆</text>
+          <text x="104" y="304" font-family="Caveat,cursive" font-size="11" text-anchor="middle" fill="#1b1b1f">Branding</text>
+          <text x="289" y="304" font-family="Caveat,cursive" font-size="11" text-anchor="middle" fill="#1b1b1f">Marketing</text>
+          <text x="474" y="304" font-family="Caveat,cursive" font-size="11" text-anchor="middle" fill="#1b1b1f">Design</text>
+          <line x1="24" y1="316" x2="184" y2="316" stroke="#d8d3c3" stroke-width="2.5"/>
+          <line x1="24" y1="324" x2="160" y2="324" stroke="#d8d3c3" stroke-width="2.5"/>
+          <line x1="209" y1="316" x2="369" y2="316" stroke="#d8d3c3" stroke-width="2.5"/>
+          <line x1="394" y1="316" x2="554" y2="316" stroke="#d8d3c3" stroke-width="2.5"/>
+          <!-- Footer -->
+          <rect x="6" y="346" width="590" height="68" fill="#1b1b1f"/>
+          <text x="301" y="368" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(251,250,244,.4)" text-anchor="middle" letter-spacing="1">FAQ · CONTACT · PORTFOLIO · BRANDING · SOCIAL MEDIA · DIGITAL MARKETING</text>
+          <text x="301" y="382" font-family="Spline Sans Mono,monospace" font-size="6.5" fill="rgba(251,250,244,.25)" text-anchor="middle" letter-spacing="1">hello@holi.com · © HMLC All Rights Reserved 2026</text>
+
+          <!-- RED ANNOTATIONS -->
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M654 64 C630 64 618 64 598 64"/><path d="M598 64 l10 -5 M598 64 l4 10"/>
+          </g>
+          <text x="660" y="54" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">Purple + gold</text>
+          <text x="660" y="70" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">= template luxury</text>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M660 148 C636 140 620 134 598 134"/><path d="M598 134 l12 -3 M598 134 l2 12"/>
+          </g>
+          <text x="666" y="134" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">Stock photo hero,</text>
+          <text x="666" y="150" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">no taste signal</text>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M656 295 C634 295 620 295 598 295"/><path d="M598 295 l10 -5 M598 295 l4 10"/>
+          </g>
+          <text x="662" y="282" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">Clip-art icons,</text>
+          <text x="662" y="298" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">no portfolio</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Before · Homepage</p><p class="d">A confident agency using the language of discount luxury. Purple signals royalty; gold signals wealth. Together they signal: "this is a template." The portfolio — the only thing that actually converts a client — is invisible.</p></div></div>
+    </div>
+
+    <!-- BEFORE 2: Services page -->
+    <div class="fig" data-name="hmlc-before-02-services">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 880 420" role="img" aria-label="Old services page with nine items in a dense bullet-list table, no visual hierarchy or differentiation.">
+          <!-- Browser chrome -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="6" width="590" height="408" rx="10" fill="white"/>
+            <rect x="6" y="6" width="590" height="36" rx="10" fill="url(#hk)"/>
+            <rect x="6" y="26" width="590" height="16" fill="url(#hk)"/>
+            <circle cx="26" cy="24" r="6" fill="url(#hr)"/>
+            <circle cx="46" cy="24" r="6" fill="url(#hy)"/>
+            <circle cx="66" cy="24" r="6" fill="url(#hg)"/>
+            <rect x="94" y="13" width="388" height="21" rx="10.5" fill="white"/>
+          </g>
+          <text x="288" y="27" font-family="Spline Sans Mono,monospace" font-size="8.5" fill="#74705F" text-anchor="middle">hmluxuryconsultancy.com/services</text>
+          <line x1="6" y1="42" x2="596" y2="42" stroke="#d8d3c3" stroke-width="1.2"/>
+          <!-- Minimal header from before -->
+          <rect x="6" y="42" width="590" height="36" fill="url(#hv)"/>
+          <text x="30" y="64" font-family="Caveat,cursive" font-weight="700" font-size="13" fill="#fff">HMLC</text>
+          <text x="120" y="62" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing=".4">HOME · ABOUT · SERVICES · PORTFOLIO · BLOG · CONTACT</text>
+          <!-- Page title -->
+          <text x="301" y="108" font-family="Caveat,cursive" font-weight="700" font-size="22" fill="#1b1b1f" text-anchor="middle">OUR SERVICES</text>
+          <line x1="150" y1="116" x2="452" y2="116" stroke="#D4AF37" stroke-width="2.4"/>
+          <!-- 9 services in 3-col table -->
+          <g stroke="#d8d3c3" stroke-width="1.2" fill="none">
+            <rect x="18" y="126" width="176" height="62" rx="4" fill="white"/>
+            <rect x="206" y="126" width="176" height="62" rx="4" fill="white"/>
+            <rect x="394" y="126" width="176" height="62" rx="4" fill="white"/>
+            <rect x="18" y="198" width="176" height="62" rx="4" fill="white"/>
+            <rect x="206" y="198" width="176" height="62" rx="4" fill="white"/>
+            <rect x="394" y="198" width="176" height="62" rx="4" fill="white"/>
+            <rect x="18" y="270" width="176" height="62" rx="4" fill="white"/>
+            <rect x="206" y="270" width="176" height="62" rx="4" fill="white"/>
+            <rect x="394" y="270" width="176" height="62" rx="4" fill="white"/>
+          </g>
+          <!-- Icons: gold diamonds in each cell -->
+          <g font-family="Caveat,cursive" font-size="13" fill="#D4AF37" text-anchor="middle">
+            <text x="106" y="148">♦</text><text x="294" y="148">♦</text><text x="482" y="148">♦</text>
+            <text x="106" y="220">♦</text><text x="294" y="220">♦</text><text x="482" y="220">♦</text>
+            <text x="106" y="292">♦</text><text x="294" y="292">♦</text><text x="482" y="292">♦</text>
+          </g>
+          <!-- Service names: tiny -->
+          <g font-family="Caveat,cursive" font-size="10" fill="#1b1b1f" text-anchor="middle">
+            <text x="106" y="163">Branding Services</text>
+            <text x="294" y="163">Brand Consultation</text>
+            <text x="482" y="163">Social Media</text>
+            <text x="106" y="235">Website Design</text>
+            <text x="294" y="235">Luxury Training</text>
+            <text x="482" y="235">Luxury Marketing</text>
+            <text x="106" y="307">Brand Photoshoot</text>
+            <text x="294" y="307">Creative Partner</text>
+            <text x="482" y="307">Visual Merch.</text>
+          </g>
+          <!-- Text lines -->
+          <g stroke="#e8e5e0" stroke-width="2">
+            <line x1="26" y1="174" x2="186" y2="174"/>
+            <line x1="26" y1="180" x2="170" y2="180"/>
+            <line x1="214" y1="174" x2="374" y2="174"/>
+            <line x1="402" y1="174" x2="562" y2="174"/>
+            <line x1="26" y1="246" x2="186" y2="246"/>
+            <line x1="214" y1="246" x2="374" y2="246"/>
+            <line x1="402" y1="246" x2="562" y2="246"/>
+            <line x1="26" y1="318" x2="186" y2="318"/>
+            <line x1="214" y1="318" x2="374" y2="318"/>
+            <line x1="402" y1="318" x2="562" y2="318"/>
+          </g>
+          <!-- Hire Us button -->
+          <rect x="218" y="348" width="166" height="28" rx="4" fill="#D4AF37"/>
+          <text x="301" y="366" font-family="Caveat,cursive" font-weight="700" font-size="13" fill="#1b1b1f" text-anchor="middle">HIRE US NOW</text>
+          <!-- Small footer -->
+          <rect x="6" y="386" width="590" height="28" fill="#1b1b1f"/>
+          <text x="301" y="402" font-family="Spline Sans Mono,monospace" font-size="6.5" fill="rgba(251,250,244,.35)" text-anchor="middle" letter-spacing="1">© HMLC ALL RIGHTS RESERVED 2026</text>
+
+          <!-- Annotations -->
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M658 156 C636 156 622 156 596 156"/><path d="M596 156 l10 -5 M596 156 l4 10"/>
+          </g>
+          <text x="664" y="146" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">9 services,</text>
+          <text x="664" y="162" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">zero hierarchy</text>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M662 292 C638 292 622 292 596 292"/><path d="M596 292 l10 -5 M596 292 l4 10"/>
+          </g>
+          <text x="668" y="280" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">Identical cells,</text>
+          <text x="668" y="296" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">no differentiation</text>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M660 360 C638 360 622 360 596 360"/><path d="M596 360 l10 -5 M596 360 l4 10"/>
+          </g>
+          <text x="666" y="348" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">CTA before the</text>
+          <text x="666" y="364" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">prospect trusts you</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Before · Services</p><p class="d">Nine offerings, identical gold diamonds, no story. A premium client scanning this page can't tell what makes HMLC different from any other agency — because nothing here makes that case.</p></div></div>
+    </div>
+
+    <!-- BEFORE 3: Portfolio buried -->
+    <div class="fig" data-name="hmlc-before-03-portfolio-buried">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 880 420" role="img" aria-label="Portfolio page with only two small project thumbnails, buried and without context.">
+          <!-- Browser chrome -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="6" width="590" height="408" rx="10" fill="white"/>
+            <rect x="6" y="6" width="590" height="36" rx="10" fill="url(#hk)"/>
+            <rect x="6" y="26" width="590" height="16" fill="url(#hk)"/>
+            <circle cx="26" cy="24" r="6" fill="url(#hr)"/>
+            <circle cx="46" cy="24" r="6" fill="url(#hy)"/>
+            <circle cx="66" cy="24" r="6" fill="url(#hg)"/>
+            <rect x="94" y="13" width="388" height="21" rx="10.5" fill="white"/>
+          </g>
+          <text x="288" y="27" font-family="Spline Sans Mono,monospace" font-size="8.5" fill="#74705F" text-anchor="middle">hmluxuryconsultancy.com/portfolio</text>
+          <line x1="6" y1="42" x2="596" y2="42" stroke="#d8d3c3" stroke-width="1.2"/>
+          <!-- Purple nav -->
+          <rect x="6" y="42" width="590" height="36" fill="url(#hv)"/>
+          <text x="30" y="64" font-family="Caveat,cursive" font-weight="700" font-size="13" fill="#fff">HMLC</text>
+          <text x="120" y="62" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(255,255,255,.7)" letter-spacing=".4">HOME · ABOUT · SERVICES · PORTFOLIO · BLOG · CONTACT</text>
+
+          <!-- "Portfolio" heading + breadcrumb hint -->
+          <text x="301" y="108" font-family="Caveat,cursive" font-weight="700" font-size="22" fill="#1b1b1f" text-anchor="middle">Portfolio</text>
+          <!-- Breadcrumb: Home > Portfolio -->
+          <text x="301" y="122" font-family="Spline Sans Mono,monospace" font-size="8" fill="#74705F" text-anchor="middle">Home → Services → About → Portfolio</text>
+
+          <!-- Mostly empty: 2 small thumbnails floating in space -->
+          <rect x="80" y="148" width="194" height="140" rx="6" fill="url(#hk)" stroke="#d8d3c3" stroke-width="1.4"/>
+          <rect x="316" y="148" width="194" height="140" rx="6" fill="url(#hk)" stroke="#d8d3c3" stroke-width="1.4"/>
+          <text x="177" y="225" font-family="Caveat,cursive" font-size="12" fill="#74705F" text-anchor="middle">Project 1</text>
+          <text x="413" y="225" font-family="Caveat,cursive" font-size="12" fill="#74705F" text-anchor="middle">Project 2</text>
+          <text x="177" y="242" font-family="Spline Sans Mono,monospace" font-size="7.5" fill="#d8d3c3" text-anchor="middle">Luxury Branding</text>
+          <text x="413" y="242" font-family="Spline Sans Mono,monospace" font-size="7.5" fill="#d8d3c3" text-anchor="middle">Social Media</text>
+
+          <!-- "More coming soon" -->
+          <text x="301" y="318" font-family="Caveat,cursive" font-size="15" fill="#74705F" text-anchor="middle">More projects coming soon...</text>
+          <line x1="150" y1="328" x2="452" y2="328" stroke="#e8e5e0" stroke-width="1.5"/>
+
+          <!-- View all button leading nowhere -->
+          <rect x="222" y="340" width="158" height="26" rx="4" fill="url(#hv)"/>
+          <text x="301" y="357" font-family="Caveat,cursive" font-size="11" fill="white" text-anchor="middle" font-weight="700">VIEW ALL PROJECTS</text>
+
+          <!-- Footer -->
+          <rect x="6" y="378" width="590" height="36" fill="#1b1b1f"/>
+          <text x="301" y="400" font-family="Spline Sans Mono,monospace" font-size="6.5" fill="rgba(251,250,244,.3)" text-anchor="middle" letter-spacing="1">© HMLC ALL RIGHTS RESERVED 2026</text>
+
+          <!-- Annotations -->
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M656 120 C634 121 618 122 596 124"/><path d="M596 124 l11 -4 M596 124 l2 11"/>
+          </g>
+          <text x="662" y="110" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">4 clicks deep</text>
+          <text x="662" y="126" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">to reach it</text>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M660 220 C638 220 620 220 596 220"/><path d="M596 220 l10 -5 M596 220 l4 10"/>
+          </g>
+          <text x="666" y="208" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">2 projects shown.</text>
+          <text x="666" y="224" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">No context, story.</text>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2" stroke-linecap="round">
+            <path d="M664 318 C640 318 622 318 596 318"/><path d="M596 318 l10 -5 M596 318 l4 10"/>
+          </g>
+          <text x="670" y="308" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">"Coming soon"</text>
+          <text x="670" y="324" font-family="Caveat,cursify" font-weight="700" font-size="14" fill="#e03131">= not ready</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Before · Portfolio</p><p class="d">The thing that sells a branding agency — its work — was buried four clicks deep and showed two thumbnail images with no project names, client context, or outcome. A branding agency without visible branding is a paradox.</p></div></div>
+    </div>
+
+  </div><!-- /browsers -->
+</section>
+
+<div class="wrap col"><span class="rule"><svg viewBox="0 0 600 18" preserveAspectRatio="none"><path d="M2 10 q40 -8 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span></div>
+
+<!-- ===== § 04 RESEARCH ===== -->
+<section class="sec" id="research">
+  <div class="wrap col">
+    <span class="eyebrow">listen before you draw</span>
+    <p class="kicker">04 — Research &amp; insight</p>
+    <h2>I stopped asking how to make it look more luxurious, and started asking why it didn&rsquo;t.</h2>
+    <p class="lead">The instinct from the client brief was &ldquo;make it feel more premium.&rdquo; Research killed that framing. The problem wasn't that the site lacked premium cues — it was drowning in the wrong ones. Luxury, as the most prestigious brands practice it, is defined by <em>what you leave out</em>.</p>
+    <div class="chips" style="margin-bottom:28px">
+      <span class="chip"><span>Method</span>5 competitor teardowns</span>
+      <span class="chip"><span>Method</span>6 prospect interviews</span>
+      <span class="chip"><span>Method</span>Session recording analysis</span>
+      <span class="chip"><span>Method</span>200+ Instagram DM review</span>
+      <span class="chip"><span>Method</span>3 first-impression tests</span>
+    </div>
+    <h3>Four findings that reset everything</h3>
+  </div>
+
+  <div class="wrap">
+    <div class="cards">
+      <div class="card"><span class="n">01</span><h4>Luxury doesn&rsquo;t announce itself</h4><p>Every premium agency we benchmarked — Ragged Edge, Pentagram, Wolff Olins — used restraint: white space, minimal palette, no ornamentation. Purple gradients and gold drop-shadows are the visual language of <em>aspirational</em> luxury, not actual luxury.</p></div>
+      <div class="card"><span class="n">02</span><h4>The portfolio was the pitch</h4><p>All six prospects said the same thing in different words: they decided to reach out based on seeing the work — not after reading the service descriptions. The portfolio was the conversion mechanism, and it was invisible on the homepage.</p></div>
+      <div class="card"><span class="n">03</span><h4>Confusion destroys trust faster than bad design</h4><p>Users who couldn't find the portfolio in ten seconds assumed the agency lacked organisation. The navigation structure communicated the agency's internal thinking, not a client's mental model. Eight items in a nav bar is eight things to ignore.</p></div>
+      <div class="card"><span class="n">04</span><h4>The client roster was a hidden superpower</h4><p>BMW. ITC. Kotak. 30+ brand names that a luxury client would immediately recognise as social proof — buried in the footer, rendered as tiny greyscale rectangles. Making these visible and prominent above the fold would change the conversation before a word was read.</p></div>
+    </div>
+  </div>
+
+  <div class="wrap col" style="margin-top:18px">
+    <p>One sentence from a prospect interview became the brief: <span class="hl">&ldquo;I assumed they were a small studio. Then I saw they&rsquo;d worked with BMW and I called them immediately.&rdquo;</span> The problem wasn&rsquo;t HMLC&rsquo;s work. It was the order in which the website revealed it.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="fig" data-name="hmlc-persona-priya">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 1000 360" role="img" aria-label="Primary persona: Priya, a luxury brand founder looking for a branding partner who already speaks luxury.">
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="18" y="18" width="964" height="324" rx="18" fill="#fff"/>
+            <circle cx="110" cy="118" r="52" fill="url(#ho)"/>
+            <!-- face -->
+            <path d="M92 112 a3 3 0 1 0 .1 0 M128 112 a3 3 0 1 0 .1 0" stroke-width="3"/>
+            <path d="M94 138 q16 14 32 0"/>
+            <path d="M72 84 q38 -30 76 0" stroke-width="2.2"/>
+            <!-- vertical divider -->
+            <line x1="360" y1="44" x2="360" y2="316" stroke-dasharray="2 8" stroke-width="2"/>
+            <!-- comfort bar -->
+            <rect x="392" y="296" width="560" height="14" rx="7"/>
+            <rect x="392" y="296" width="392" height="14" rx="7" fill="url(#ho)"/>
+          </g>
+          <g font-family="Caveat,cursive" fill="#1b1b1f">
+            <text x="186" y="100" font-size="32" font-weight="700">Priya · 34</text>
+            <text x="186" y="130" font-size="16" fill="#74705F">Luxury D2C founder · Mumbai · Emerging brand</text>
+            <text x="110" y="202" font-size="18" font-weight="700" text-anchor="middle" fill="#403C32">&ldquo;I know good taste.</text>
+            <text x="110" y="224" font-size="18" font-weight="700" text-anchor="middle" fill="#403C32">I need you to prove</text>
+            <text x="110" y="246" font-size="18" font-weight="700" text-anchor="middle" fill="#403C32">you do too.&rdquo;</text>
+            <!-- goals -->
+            <text x="392" y="78" font-size="22" font-weight="700" fill="#2f9e44">Goals</text>
+            <g font-size="16"><text x="414" y="118">A branding partner who already speaks luxury</text><text x="414" y="158">Work that earns premium pricing for her brand</text><text x="414" y="198">An agency that understands restraint</text></g>
+            <!-- fears -->
+            <text x="700" y="78" font-size="22" font-weight="700" fill="#e03131">Fears</text>
+            <g font-size="16"><text x="722" y="118">Hiring a "luxury" agency that uses clipart</text><text x="722" y="158">A portfolio full of unrecognisable brands</text><text x="722" y="198">Over-promising, under-delivering</text></g>
+            <text x="392" y="286" font-size="13" fill="#74705F">Taste-literacy — high</text>
+          </g>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2.6" stroke-linecap="round"><path d="M394 112 l5 6 l9 -12"/><path d="M394 152 l5 6 l9 -12"/><path d="M394 192 l5 6 l9 -12"/></g>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2.6" stroke-linecap="round"><path d="M702 108 l12 12 M714 108 l-12 12"/><path d="M702 152 l12 12 M714 152 l-12 12"/><path d="M702 192 l12 12 M714 192 l-12 12"/></g>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Fig. 02 · Primary persona</p><p class="d">Not a demographic construct — a decision filter. Every design choice was checked against Priya: would this signal taste to someone whose entire business depends on getting taste right?</p></div></div>
+    </div>
+  </div>
+</section>
+<div class="wrap col"><span class="rule"><svg viewBox="0 0 600 18" preserveAspectRatio="none"><path d="M2 10 q40 -8 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span></div>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="sec testimonials">
+  <span class="t-eyebrow">in their own words</span>
+  <h2>What clients said — before they saw the new site</h2>
+  <p class="t-sub">Excellent work, confusing wrapper.</p>
+  <div class="dc-wrap">
+    <div class="dc">
+      <div class="dc-top">
+        <span class="dc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <span class="dc-title">"A breath of fresh air."</span>
+      </div>
+      <p class="dc-quote">"Right from the Founder to every team member, there's warmth with a personal touch. The work? Extraordinary."</p>
+      <p class="dc-meta">Avni Tripathi · Aahana The Forest Resort</p>
+    </div>
+    <div class="dc">
+      <div class="dc-top">
+        <span class="dc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></span>
+        <span class="dc-title">"Like therapy."</span>
+      </div>
+      <p class="dc-quote">"They distilled the core philosophies… like a magic mirror that transformed my vague idea into a resilient, living vision."</p>
+      <p class="dc-meta">Nastaran Noori Begum · Sloop</p>
+    </div>
+    <div class="dc">
+      <div class="dc-top">
+        <span class="dc-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+        <span class="dc-title">"Exceeded expectations."</span>
+      </div>
+      <p class="dc-quote">"HMLC's branding services perfectly captured our fine-dine microbrewery's essence. Every detail, intentional."</p>
+      <p class="dc-meta">Sayee Zodage · Nincasa Founder</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== § 05 REFRAME ===== -->
+<section class="sec" id="redesign">
+  <div class="wrap col">
+    <span class="eyebrow">the turn</span>
+    <p class="kicker">05 — The reframe</p>
+    <h2>If the work is luxury, the website must be too. And luxury, done right, is mostly absence.</h2>
+    <p class="lead">This is where the project changed shape. We weren&rsquo;t going to add more premium cues — we were going to remove the wrong ones entirely. Every element on the old site that &ldquo;felt luxury&rdquo; to a non-luxury audience was obscuring the thing that actually communicates luxury: the quality of the work itself.</p>
+    <div class="callout">
+      <span class="tag">North star</span>
+      <p class="big">Restraint. Portfolio first.<br>Let the clients do the selling.</p>
+    </div>
+    <p>Three principles shaped every decision from here:</p>
+  </div>
+  <div class="wrap">
+    <div class="princ">
+      <div class="p"><div class="ix">1</div><h4>White space is a luxury</h4><p>Remove until it hurts, then remove one more element. Empty space costs confidence to deploy. It signals: we don't need to fill this. That's the feeling luxury brands charge for.</p></div>
+      <div class="p"><div class="ix">2</div><h4>Work before words</h4><p>The portfolio is the primary conversion mechanism. It goes at the top of the homepage, above the fold, before any copy makes a claim. The work proves the claim; the copy doesn't need to.</p></div>
+      <div class="p"><div class="ix">3</div><h4>Social proof over self-promotion</h4><p>BMW and ITC in the first scroll do more work than &ldquo;India's Premier Luxury Agency&rdquo; in a purple banner. Let the client roster speak. Make it impossible to miss.</p></div>
+    </div>
+  </div>
+
+  <!-- IA BEFORE / AFTER -->
+  <div class="wrap">
+    <div class="fig fig--full" data-name="hmlc-ia-before-after">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 1080 460" role="img" aria-label="Information architecture: before shows portfolio buried 4 clicks deep; after shows it as the second section of the homepage.">
+          <text x="270" y="36" font-family="Spline Sans Mono,monospace" font-size="12" letter-spacing="1.5" fill="#e03131" text-anchor="middle">BEFORE — CLUTTERED, PORTFOLIO BURIED</text>
+          <text x="790" y="36" font-family="Spline Sans Mono,monospace" font-size="12" letter-spacing="1.5" fill="#2f9e44" text-anchor="middle">AFTER — FLAT, PORTFOLIO-FIRST</text>
+          <g filter="url(#rough2)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-dasharray="2 9"><line x1="540" y1="54" x2="540" y2="440"/></g>
+
+          <!-- LEFT TREE: deep, gated -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="195" y="58" width="150" height="34" rx="8"/>
+            <rect x="195" y="118" width="150" height="34" rx="8"/>
+            <rect x="195" y="178" width="150" height="34" rx="8"/>
+            <rect x="195" y="238" width="150" height="34" rx="8" fill="url(#hr)"/>
+            <rect x="80" y="298" width="130" height="34" rx="8"/>
+            <rect x="310" y="298" width="130" height="34" rx="8" fill="url(#hr)"/>
+            <rect x="195" y="358" width="150" height="34" rx="8" fill="url(#hr)"/>
+            <!-- connectors -->
+            <path d="M270 92 l0 26"/><path d="M270 152 l0 26"/><path d="M270 212 l0 26"/>
+            <path d="M270 272 l-125 26"/><path d="M270 272 l125 26"/>
+            <path d="M145 332 l0 0 C145 352 195 358 195 358"/><path d="M375 332 C375 352 330 358 330 358"/>
+            <path d="M195 358 l-5 -9 M195 358 l5 -9"/>
+          </g>
+          <g font-family="Caveat,cursive" fill="#1b1b1f" text-anchor="middle">
+            <text x="270" y="79" font-size="15">Homepage</text>
+            <text x="270" y="139" font-size="15">Services (7 items)</text>
+            <text x="270" y="199" font-size="15">About Us</text>
+            <text x="270" y="259" font-size="14" fill="#e03131" font-weight="700">Nav: 8 items</text>
+            <text x="145" y="319" font-size="14">Blog</text>
+            <text x="375" y="319" font-size="14" fill="#e03131" font-weight="700">Portfolio</text>
+            <text x="270" y="379" font-size="13" fill="#e03131" font-weight="700">↓ buried 3 clicks deep</text>
+          </g>
+          <!-- portfolio buried loop arrow -->
+          <g filter="url(#rough)" fill="none" stroke="#e03131" stroke-width="2.4" stroke-linecap="round">
+            <path class="draw" d="M490 316 C530 268 480 212 370 210"/><path d="M370 210 l10 -6 M370 210 l5 11"/>
+          </g>
+          <text x="516" y="260" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">3 clicks</text>
+          <text x="516" y="276" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#e03131">to reach it</text>
+
+          <!-- RIGHT TREE: flat, portfolio-first -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="715" y="58" width="150" height="34" rx="8"/>
+            <rect x="710" y="130" width="160" height="44" rx="12" fill="url(#hg)"/>
+            <rect x="710" y="210" width="160" height="44" rx="12" fill="url(#hg)"/>
+            <rect x="586" y="296" width="108" height="34" rx="8"/>
+            <rect x="716" y="296" width="108" height="34" rx="8"/>
+            <rect x="846" y="296" width="108" height="34" rx="8"/>
+            <rect x="710" y="372" width="160" height="44" rx="12" fill="url(#hg)"/>
+            <!-- connectors -->
+            <path d="M790 92 l0 38"/>
+            <path d="M790 174 l0 36"/>
+            <path d="M790 254 C790 278 640 280 640 294"/><path d="M640 296 l-5 -10 M640 296 l5 -10"/>
+            <path d="M790 254 l0 42"/><path d="M790 296 l-5 -10 M790 296 l5 -10"/>
+            <path d="M790 254 C790 278 900 280 900 294"/><path d="M900 296 l-5 -10 M900 296 l5 -10"/>
+            <path d="M640 330 C640 358 760 370 760 370"/>
+            <path d="M790 330 l0 42"/>
+            <path d="M900 330 C900 358 830 370 830 370"/>
+            <path d="M790 372 l-5 -10 M790 372 l5 -10"/>
+          </g>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="3" stroke-linecap="round"><path d="M750 390 l8 9 l16 -20"/></g>
+          <g font-family="Caveat,cursive" fill="#1b1b1f" text-anchor="middle">
+            <text x="790" y="79" font-size="15">Homepage</text>
+            <text x="790" y="157" font-size="17" font-weight="700">Portfolio (above fold)</text>
+            <text x="790" y="237" font-size="17" font-weight="700">Client Logos</text>
+            <text x="640" y="317" font-size="14">Services</text>
+            <text x="790" y="317" font-size="14">About</text>
+            <text x="900" y="317" font-size="14">Blog</text>
+            <text x="810" y="398" font-size="17" font-weight="700">Contact</text>
+          </g>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Fig. 03 · Information architecture</p><p class="d">Same capability, restructured. The left tree hides the portfolio behind three navigation decisions and buries social proof in the footer. The right tree puts the work where it converts — at the top — and makes the navigation a single-level decision.</p></div></div>
+    </div>
+  </div>
+
+  <!-- COLOUR PALETTE COMPARISON -->
+  <div class="wrap col" style="margin-top:48px">
+    <p class="kicker">06 — Colour &amp; type</p>
+    <h3>The old palette announced luxury. The new one <em>is</em> luxury.</h3>
+    <p>The most important visual decision of the project was subtraction — removing the purple and gold that communicated &ldquo;trying to look expensive&rdquo; and replacing them with a palette that expensive brands actually use.</p>
+  </div>
+  <div class="wrap">
+    <div class="fig fig--full" data-name="hmlc-palette-comparison">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 1080 300" role="img" aria-label="Side-by-side palette comparison: before uses purple and gold; after uses near-black, off-white and warm stone.">
+          <!-- Divider -->
+          <g filter="url(#rough2)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-dasharray="2 9"><line x1="540" y1="20" x2="540" y2="280"/></g>
+          <text x="270" y="40" font-family="Spline Sans Mono,monospace" font-size="12" letter-spacing="1.5" fill="#e03131" text-anchor="middle">BEFORE — "LUXURY" SIGNALLING</text>
+          <text x="810" y="40" font-family="Spline Sans Mono,monospace" font-size="12" letter-spacing="1.5" fill="#2f9e44" text-anchor="middle">AFTER — ACTUAL LUXURY</text>
+
+          <!-- BEFORE swatches -->
+          <g filter="url(#rough)" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round">
+            <rect x="60" y="58" width="64" height="64" rx="8" fill="#6B2FA0"/>
+            <rect x="140" y="58" width="64" height="64" rx="8" fill="#D4AF37"/>
+            <rect x="220" y="58" width="64" height="64" rx="8" fill="#8B1A1A"/>
+            <rect x="300" y="58" width="64" height="64" rx="8" fill="white"/>
+            <rect x="380" y="58" width="64" height="64" rx="8" fill="#1b1b1f"/>
+          </g>
+          <g font-family="Spline Sans Mono,monospace" font-size="9" fill="#74705F" text-anchor="middle">
+            <text x="92" y="138">#6B2FA0</text><text x="92" y="150">Purple</text>
+            <text x="172" y="138">#D4AF37</text><text x="172" y="150">Gold</text>
+            <text x="252" y="138">#8B1A1A</text><text x="252" y="150">Crimson</text>
+            <text x="332" y="138">White</text>
+            <text x="412" y="138">Black</text>
+          </g>
+          <!-- Before font sample -->
+          <text x="240" y="196" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#6B2FA0" text-anchor="middle" letter-spacing="4">LUXURY BRAND</text>
+          <text x="240" y="218" font-family="Georgia,serif" font-size="13" fill="#D4AF37" text-anchor="middle" letter-spacing="2">STRATEGY &amp; DESIGN</text>
+          <text x="240" y="260" font-family="Caveat,cursive" font-size="16" fill="#e03131" text-anchor="middle" font-weight="700">↑ communicates aspiration, not taste</text>
+
+          <!-- AFTER swatches -->
+          <g filter="url(#rough)" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round">
+            <rect x="580" y="58" width="64" height="64" rx="8" fill="#141414"/>
+            <rect x="660" y="58" width="64" height="64" rx="8" fill="#FAFAFA" stroke="#d8d3c3"/>
+            <rect x="740" y="58" width="64" height="64" rx="8" fill="#E8E5E0"/>
+            <rect x="820" y="58" width="64" height="64" rx="8" fill="#C4A882"/>
+            <rect x="900" y="58" width="64" height="64" rx="8" fill="#1b1b1f"/>
+          </g>
+          <g font-family="Spline Sans Mono,monospace" font-size="9" fill="#74705F" text-anchor="middle">
+            <text x="612" y="138">#141414</text><text x="612" y="150">Ink</text>
+            <text x="692" y="138">#FAFAFA</text><text x="692" y="150">Paper</text>
+            <text x="772" y="138">#E8E5E0</text><text x="772" y="150">Stone</text>
+            <text x="852" y="138">#C4A882</text><text x="852" y="150">Champagne</text>
+            <text x="932" y="138">#1b1b1f</text><text x="932" y="150">Deep</text>
+          </g>
+          <!-- After font sample -->
+          <text x="762" y="196" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="22" font-weight="800" fill="#141414" text-anchor="middle" letter-spacing="-1">Luxury Brand</text>
+          <text x="762" y="218" font-family="Spline Sans Mono,monospace" font-size="11" fill="#74705F" text-anchor="middle" letter-spacing="3">STRATEGY &amp; DESIGN</text>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2.4" stroke-linecap="round"><path d="M714 230 l6 7 l10 -13"/></g>
+          <text x="770" y="260" font-family="Caveat,cursive" font-size="16" fill="#2f9e44" text-anchor="middle" font-weight="700">communicates restraint and confidence</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Fig. 04 · Palette shift</p><p class="d">The before palette signals "luxury" to someone who's never worked with luxury. The after palette is used by the brands that define it. The delta isn't colour — it's the confidence to use almost none.</p></div></div>
+    </div>
+  </div>
+
+  <!-- EXPLORATION: crazy eights -->
+  <div class="wrap col" style="margin-top:48px">
+    <p class="kicker">07 — Exploration</p>
+    <h3>Five directions. One survivor.</h3>
+    <p>Before committing, I sketched the homepage concept across five distinct directions — each testing a different hypothesis about what would resonate with Priya, our primary prospect.</p>
+  </div>
+  <div class="wrap">
+    <div class="fig fig--full" data-name="hmlc-direction-explorations">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 1080 320" role="img" aria-label="Five website direction sketches: dark editorial, bold typography, portfolio-hero, warm personal, and the chosen clean minimal.">
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- D1: Dark editorial -->
+            <rect x="20" y="30" width="168" height="220" rx="10"/>
+            <rect x="20" y="30" width="168" height="220" rx="10" fill="#1b1b1f"/>
+            <line x1="36" y1="90" x2="172" y2="90" stroke="white" stroke-width="6"/>
+            <line x1="36" y1="108" x2="172" y2="108" stroke="white" stroke-width="6"/>
+            <line x1="36" y1="126" x2="140" y2="126" stroke="white" stroke-width="6"/>
+            <line x1="36" y1="160" x2="172" y2="160" stroke="#888" stroke-width="2.5"/>
+            <line x1="36" y1="170" x2="150" y2="170" stroke="#888" stroke-width="2.5"/>
+            <rect x="36" y="190" width="148" height="24" rx="12" fill="none" stroke="white" stroke-width="1.5"/>
+            <!-- D2: Bold typography -->
+            <rect x="207" y="30" width="168" height="220" rx="10" fill="white"/>
+            <line x1="223" y1="66" x2="359" y2="66" stroke="#1b1b1f" stroke-width="10"/>
+            <line x1="223" y1="84" x2="359" y2="84" stroke="#1b1b1f" stroke-width="10"/>
+            <line x1="223" y1="102" x2="300" y2="102" stroke="#1b1b1f" stroke-width="10"/>
+            <rect x="223" y="140" width="168" height="64" rx="4" fill="url(#hk)"/>
+            <rect x="223" y="212" width="168" height="24" rx="4" fill="url(#hk)"/>
+            <!-- D3: Portfolio hero (CHOSEN) -->
+            <rect x="394" y="30" width="168" height="220" rx="10" fill="white"/>
+            <rect x="394" y="56" width="168" height="108" rx="4" fill="#141414"/>
+            <rect x="410" y="72" width="72" height="48" rx="3" fill="url(#hk)"/>
+            <rect x="490" y="72" width="64" height="48" rx="3" fill="url(#hk)"/>
+            <text x="478" y="190" font-family="Caveat,cursive" font-size="13" fill="#1b1b1f" text-anchor="middle" font-weight="700">Our Work</text>
+            <line x1="410" y1="206" x2="546" y2="206" stroke="#1b1b1f" stroke-width="5"/>
+            <line x1="410" y1="220" x2="510" y2="220" stroke="#d8d3c3" stroke-width="3"/>
+            <!-- D4: Warm personal -->
+            <rect x="581" y="30" width="168" height="220" rx="10" fill="url(#ho)"/>
+            <circle cx="665" cy="90" r="36" fill="white" stroke="#1b1b1f" stroke-width="1.5"/>
+            <line x1="597" y1="148" x2="733" y2="148" stroke="#1b1b1f" stroke-width="5"/>
+            <line x1="597" y1="164" x2="733" y2="164" stroke="#1b1b1f" stroke-width="5"/>
+            <line x1="597" y1="180" x2="690" y2="180" stroke="#1b1b1f" stroke-width="5"/>
+            <!-- D5: Minimal clean -->
+            <rect x="768" y="30" width="168" height="220" rx="10" fill="#FAFAFA"/>
+            <line x1="784" y1="80" x2="920" y2="80" stroke="#1b1b1f" stroke-width="7"/>
+            <line x1="784" y1="95" x2="920" y2="95" stroke="#1b1b1f" stroke-width="7"/>
+            <line x1="784" y1="110" x2="870" y2="110" stroke="#1b1b1f" stroke-width="7"/>
+            <line x1="784" y1="130" x2="900" y2="130" stroke="#d8d3c3" stroke-width="3"/>
+            <line x1="784" y1="142" x2="860" y2="142" stroke="#d8d3c3" stroke-width="3"/>
+            <rect x="784" y="160" width="104" height="20" rx="10" fill="#141414"/>
+            <rect x="784" y="196" width="136" height="34" rx="4" fill="url(#hk)"/>
+            <rect x="784" y="196" width="64" height="34" rx="4" fill="#141414"/>
+          </g>
+          <!-- Chosen circle on D3 -->
+          <g filter="url(#rough)" fill="none" stroke="#C4973F" stroke-width="3.2" stroke-linecap="round">
+            <path class="draw" d="M392 26 C460 8 566 18 570 86 C572 154 568 206 548 240 C522 278 428 272 396 248 C370 228 370 44 430 36"/>
+          </g>
+          <!-- Labels -->
+          <g font-family="Caveat,cursive" fill="#74705F" text-anchor="middle" font-size="13">
+            <text x="104" y="270">dark editorial</text>
+            <text x="291" y="270">bold type</text>
+            <text x="665" y="270">founder-led</text>
+            <text x="852" y="270">clean minimal</text>
+          </g>
+          <text x="478" y="270" font-family="Caveat,cursive" font-weight="700" font-size="15" fill="#C4973F" text-anchor="middle">portfolio-hero</text>
+          <text x="478" y="302" font-family="Caveat,cursive" font-weight="700" font-size="18" fill="#C4973F" text-anchor="middle">★ this one</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Fig. 05 · Direction explorations</p><p class="d">The winner led with the portfolio grid above the fold — work as the hero element. Typography and whitespace follow. The founder doesn't need to be centred; the client's brands do that job better.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap col"><span class="rule"><svg viewBox="0 0 600 18" preserveAspectRatio="none"><path d="M2 10 q40 -8 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span></div>
+
+<!-- ===== § 08 THE REDESIGN ===== -->
+<section class="sec sec--tight">
+  <div class="wrap col">
+    <span class="eyebrow">same capability, no ornamentation</span>
+    <p class="kicker">08 — The redesign</p>
+    <h2>The work leads. The words follow. The palette disappears.</h2>
+    <p class="lead">The three walls, replaced. The homepage now opens on a portfolio grid and a client roster that names BMW before the first paragraph of copy. Services have one line each — enough to identify, not enough to confuse. The palette is black, off-white, and one warm accent that never dominates.</p>
+  </div>
+  <div class="wrap browsers">
+
+    <!-- AFTER 1: Homepage -->
+    <div class="fig" data-name="hmlc-after-01-homepage">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 880 420" role="img" aria-label="New HMLC homepage: minimal black header, bold typography hero, portfolio grid immediately below the fold.">
+          <!-- Browser chrome -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="6" width="590" height="408" rx="10" fill="white"/>
+            <rect x="6" y="6" width="590" height="36" rx="10" fill="url(#hk)"/>
+            <rect x="6" y="26" width="590" height="16" fill="url(#hk)"/>
+            <circle cx="26" cy="24" r="6" fill="url(#hr)"/>
+            <circle cx="46" cy="24" r="6" fill="url(#hy)"/>
+            <circle cx="66" cy="24" r="6" fill="url(#hg)"/>
+            <rect x="94" y="13" width="388" height="21" rx="10.5" fill="white"/>
+          </g>
+          <text x="288" y="27" font-family="Spline Sans Mono,monospace" font-size="8.5" fill="#74705F" text-anchor="middle">hmluxuryconsultancy.com</text>
+          <line x1="6" y1="42" x2="596" y2="42" stroke="#d8d3c3" stroke-width="1.2"/>
+          <!-- Clean minimal nav -->
+          <rect x="6" y="42" width="590" height="38" fill="white"/>
+          <line x1="6" y1="80" x2="596" y2="80" stroke="#e8e5e0" stroke-width="1.2"/>
+          <text x="26" y="66" font-family="Spline Sans Mono,monospace" font-size="11" font-weight="600" fill="#141414" letter-spacing="1">HMLC</text>
+          <text x="200" y="64" font-family="Spline Sans Mono,monospace" font-size="7.5" fill="#74705F" letter-spacing="1">PORTFOLIO   SERVICES   ABOUT   BLOG   CONTACT</text>
+          <!-- Big bold typography hero -->
+          <line x1="18" y1="108" x2="572" y2="108" stroke="#141414" stroke-width="11"/>
+          <line x1="18" y1="128" x2="572" y2="128" stroke="#141414" stroke-width="11"/>
+          <line x1="18" y1="148" x2="440" y2="148" stroke="#141414" stroke-width="11"/>
+          <!-- Sub-text lines -->
+          <line x1="18" y1="170" x2="380" y2="170" stroke="#d8d3c3" stroke-width="3.5"/>
+          <line x1="18" y1="182" x2="320" y2="182" stroke="#d8d3c3" stroke-width="3.5"/>
+          <!-- CTA: single clean -->
+          <rect x="18" y="198" width="130" height="26" rx="13" fill="#141414"/>
+          <text x="83" y="214" font-family="Spline Sans Mono,monospace" font-size="8" fill="white" text-anchor="middle" letter-spacing="1">VIEW OUR WORK →</text>
+          <!-- Portfolio grid: starts immediately -->
+          <text x="18" y="248" font-family="Spline Sans Mono,monospace" font-size="7.5" fill="#74705F" letter-spacing="1.5">SELECT WORK</text>
+          <rect x="18" y="258" width="178" height="96" rx="5" fill="#141414"/>
+          <rect x="208" y="258" width="178" height="96" rx="5" fill="url(#hk)"/>
+          <rect x="398" y="258" width="178" height="96" rx="5" fill="#141414"/>
+          <text x="107" y="310" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(251,250,244,.55)" text-anchor="middle" letter-spacing="1">AAHANA RESORT</text>
+          <text x="297" y="310" font-family="Spline Sans Mono,monospace" font-size="7" fill="#74705F" text-anchor="middle" letter-spacing="1">SLOOP</text>
+          <text x="487" y="310" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(251,250,244,.55)" text-anchor="middle" letter-spacing="1">MIREYA</text>
+          <!-- Client logos strip: clean -->
+          <line x1="18" y1="364" x2="572" y2="364" stroke="#e8e5e0" stroke-width="1"/>
+          <text x="18" y="378" font-family="Spline Sans Mono,monospace" font-size="7" fill="#d8d3c3" letter-spacing="1.5">BMW   ITC   KOTAK   ALDO   JANE   PENN   WAND   TATE</text>
+          <line x1="18" y1="390" x2="572" y2="390" stroke="#e8e5e0" stroke-width="1"/>
+          <!-- Footer: minimal -->
+          <rect x="6" y="396" width="590" height="18" fill="#141414"/>
+
+          <!-- GREEN ANNOTATIONS -->
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M650 62 C628 62 616 62 598 62"/><path d="M598 62 l10 -5 M598 62 l4 10"/>
+          </g>
+          <text x="656" y="52" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Restraint =</text>
+          <text x="656" y="68" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">confidence</text>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M654 130 C632 130 616 130 598 130"/><path d="M598 130 l10 -5 M598 130 l4 10"/>
+          </g>
+          <text x="660" y="120" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">White space</text>
+          <text x="660" y="136" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">is a luxury</text>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M656 305 C634 305 618 305 598 305"/><path d="M598 305 l10 -5 M598 305 l4 10"/>
+          </g>
+          <text x="662" y="292" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Work leads.</text>
+          <text x="662" y="308" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Above the fold.</text>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M656 378 C634 378 618 378 598 378"/><path d="M598 378 l10 -5 M598 378 l4 10"/>
+          </g>
+          <text x="662" y="366" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">BMW in scroll 1.</text>
+          <text x="662" y="382" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Before copy.</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">After · Homepage</p><p class="d">No purple. No gold. No hero image. Just bold typography that occupies the space confidently, a portfolio grid that starts the second you stop reading the headline, and client logos that do the talking before any copy makes a claim.</p></div></div>
+    </div>
+
+    <!-- AFTER 2: Portfolio page -->
+    <div class="fig" data-name="hmlc-after-02-portfolio">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 880 420" role="img" aria-label="New portfolio page: full project cards with names, client industry labels and project type tags in a clean grid.">
+          <!-- Browser chrome -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="6" width="590" height="408" rx="10" fill="white"/>
+            <rect x="6" y="6" width="590" height="36" rx="10" fill="url(#hk)"/>
+            <rect x="6" y="26" width="590" height="16" fill="url(#hk)"/>
+            <circle cx="26" cy="24" r="6" fill="url(#hr)"/>
+            <circle cx="46" cy="24" r="6" fill="url(#hy)"/>
+            <circle cx="66" cy="24" r="6" fill="url(#hg)"/>
+            <rect x="94" y="13" width="388" height="21" rx="10.5" fill="white"/>
+          </g>
+          <text x="288" y="27" font-family="Spline Sans Mono,monospace" font-size="8.5" fill="#74705F" text-anchor="middle">hmluxuryconsultancy.com/portfolio</text>
+          <line x1="6" y1="42" x2="596" y2="42" stroke="#d8d3c3" stroke-width="1.2"/>
+          <!-- Minimal nav -->
+          <rect x="6" y="42" width="590" height="36" fill="white"/>
+          <line x1="6" y1="78" x2="596" y2="78" stroke="#e8e5e0" stroke-width="1.2"/>
+          <text x="26" y="64" font-family="Spline Sans Mono,monospace" font-size="11" font-weight="600" fill="#141414" letter-spacing="1">HMLC</text>
+          <text x="200" y="62" font-family="Spline Sans Mono,monospace" font-size="7.5" fill="#C4A882" letter-spacing="1">PORTFOLIO   SERVICES   ABOUT   BLOG   CONTACT</text>
+          <!-- Page header -->
+          <text x="18" y="106" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="22" font-weight="800" fill="#141414" letter-spacing="-1">Selected Work</text>
+          <text x="18" y="122" font-family="Spline Sans Mono,monospace" font-size="8" fill="#74705F" letter-spacing="1">7 PROJECTS · LUXURY BRANDING · IDENTITY · SOCIAL MEDIA</text>
+          <!-- Project grid: 3×2 clean cards -->
+          <rect x="18" y="134" width="178" height="110" rx="5" fill="#141414"/>
+          <rect x="208" y="134" width="178" height="110" rx="5" fill="url(#hk)"/>
+          <rect x="398" y="134" width="178" height="110" rx="5" fill="#141414"/>
+          <rect x="18" y="256" width="178" height="110" rx="5" fill="url(#hk)"/>
+          <rect x="208" y="256" width="178" height="110" rx="5" fill="#141414"/>
+          <rect x="398" y="256" width="178" height="110" rx="5" fill="url(#hk)"/>
+          <!-- Card labels: project name + tag -->
+          <g font-family="Spline Sans Mono,monospace" text-anchor="middle">
+            <text x="107" y="196" font-size="8" fill="rgba(251,250,244,.6)" letter-spacing="1">AAHANA RESORT</text>
+            <text x="107" y="210" font-size="7" fill="rgba(251,250,244,.35)" letter-spacing=".5">Luxury Branding</text>
+            <text x="297" y="196" font-size="8" fill="#74705F" letter-spacing="1">SLOOP</text>
+            <text x="297" y="210" font-size="7" fill="#d8d3c3" letter-spacing=".5">Brand Identity</text>
+            <text x="487" y="196" font-size="8" fill="rgba(251,250,244,.6)" letter-spacing="1">MIREYA</text>
+            <text x="487" y="210" font-size="7" fill="rgba(251,250,244,.35)" letter-spacing=".5">Luxury Branding</text>
+            <text x="107" y="318" font-size="8" fill="#74705F" letter-spacing="1">ANEMOII</text>
+            <text x="107" y="332" font-size="7" fill="#d8d3c3" letter-spacing=".5">Social Media</text>
+            <text x="297" y="318" font-size="8" fill="rgba(251,250,244,.6)" letter-spacing="1">GROWE</text>
+            <text x="297" y="332" font-size="7" fill="rgba(251,250,244,.35)" letter-spacing=".5">Social Media</text>
+            <text x="487" y="318" font-size="8" fill="#74705F" letter-spacing="1">REALM</text>
+            <text x="487" y="332" font-size="7" fill="#d8d3c3" letter-spacing=".5">Brand Identity</text>
+          </g>
+          <!-- Footer -->
+          <rect x="6" y="376" width="590" height="38" fill="#141414"/>
+          <text x="301" y="398" font-family="Spline Sans Mono,monospace" font-size="7" fill="rgba(251,250,244,.3)" text-anchor="middle" letter-spacing="1">© HMLC ALL RIGHTS RESERVED 2026</text>
+
+          <!-- Green annotations -->
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M654 186 C632 186 616 186 598 186"/><path d="M598 186 l10 -5 M598 186 l4 10"/>
+          </g>
+          <text x="660" y="176" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">6 projects,</text>
+          <text x="660" y="192" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">named and tagged</text>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M654 308 C632 308 616 308 598 308"/><path d="M598 308 l10 -5 M598 308 l4 10"/>
+          </g>
+          <text x="660" y="296" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Clean grid.</text>
+          <text x="660" y="312" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Work is the UI.</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">After · Portfolio</p><p class="d">Six named, tagged projects in a clean grid that starts above the fold. No "coming soon." No context missing. The dark background makes each project card feel like it's in a gallery — which is exactly the register this audience reads as premium.</p></div></div>
+    </div>
+
+    <!-- AFTER 3: Services page -->
+    <div class="fig" data-name="hmlc-after-03-services">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 880 420" role="img" aria-label="New services page: nine clean service rows with one-line descriptions, generous spacing and no decorative icons.">
+          <!-- Browser chrome -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="6" width="590" height="408" rx="10" fill="white"/>
+            <rect x="6" y="6" width="590" height="36" rx="10" fill="url(#hk)"/>
+            <rect x="6" y="26" width="590" height="16" fill="url(#hk)"/>
+            <circle cx="26" cy="24" r="6" fill="url(#hr)"/>
+            <circle cx="46" cy="24" r="6" fill="url(#hy)"/>
+            <circle cx="66" cy="24" r="6" fill="url(#hg)"/>
+            <rect x="94" y="13" width="388" height="21" rx="10.5" fill="white"/>
+          </g>
+          <text x="288" y="27" font-family="Spline Sans Mono,monospace" font-size="8.5" fill="#74705F" text-anchor="middle">hmluxuryconsultancy.com/services</text>
+          <line x1="6" y1="42" x2="596" y2="42" stroke="#d8d3c3" stroke-width="1.2"/>
+          <!-- Minimal nav -->
+          <rect x="6" y="42" width="590" height="36" fill="white"/>
+          <line x1="6" y1="78" x2="596" y2="78" stroke="#e8e5e0" stroke-width="1.2"/>
+          <text x="26" y="64" font-family="Spline Sans Mono,monospace" font-size="11" font-weight="600" fill="#141414" letter-spacing="1">HMLC</text>
+          <text x="200" y="62" font-family="Spline Sans Mono,monospace" font-size="7.5" fill="#74705F" letter-spacing="1">PORTFOLIO   SERVICES   ABOUT   BLOG   CONTACT</text>
+          <!-- Page header -->
+          <text x="18" y="108" font-family="Bricolage Grotesque,system-ui,sans-serif" font-size="22" font-weight="800" fill="#141414" letter-spacing="-1">What we do</text>
+          <!-- 9 service rows: generous spacing, one-line each -->
+          <g fill="none" stroke="#e8e5e0" stroke-width="1.2">
+            <line x1="18" y1="124" x2="572" y2="124"/>
+            <line x1="18" y1="160" x2="572" y2="160"/>
+            <line x1="18" y1="196" x2="572" y2="196"/>
+            <line x1="18" y1="232" x2="572" y2="232"/>
+            <line x1="18" y1="268" x2="572" y2="268"/>
+            <line x1="18" y1="304" x2="572" y2="304"/>
+            <line x1="18" y1="340" x2="572" y2="340"/>
+            <line x1="18" y1="376" x2="572" y2="376"/>
+          </g>
+          <!-- Service names (left) + one-liner (right) -->
+          <g font-family="Spline Sans Mono,monospace" font-size="8.5" fill="#141414">
+            <text x="18" y="146">01  Branding Services</text>
+            <text x="18" y="182">02  Brand Consultation &amp; Strategy</text>
+            <text x="18" y="218">03  Social Media Marketing</text>
+            <text x="18" y="254">04  Luxury Website Design</text>
+            <text x="18" y="290">05  Luxury Training &amp; Workshop</text>
+            <text x="18" y="326">06  Luxury Marketing</text>
+            <text x="18" y="362">07  Brand Photoshoot</text>
+          </g>
+          <g font-family="Spline Sans Mono,monospace" font-size="7.5" fill="#74705F" text-anchor="end">
+            <text x="570" y="146">From idea to identity →</text>
+            <text x="570" y="182">Strategic clarity before design →</text>
+            <text x="570" y="218">Presence that earns premium →</text>
+            <text x="570" y="254">Built to signal quality →</text>
+            <text x="570" y="290">Teaching the luxury mindset →</text>
+            <text x="570" y="326">Marketing that doesn't shout →</text>
+            <text x="570" y="362">Visual storytelling →</text>
+          </g>
+          <!-- Arrow hint on each row -->
+          <g font-family="Spline Sans Mono,monospace" font-size="10" fill="#C4A882">
+            <text x="553" y="148">→</text>
+            <text x="553" y="184">→</text>
+            <text x="553" y="220">→</text>
+            <text x="553" y="256">→</text>
+            <text x="553" y="292">→</text>
+            <text x="553" y="328">→</text>
+            <text x="553" y="364">→</text>
+          </g>
+
+          <!-- Green annotations -->
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M654 182 C632 182 616 182 598 182"/><path d="M598 182 l10 -5 M598 182 l4 10"/>
+          </g>
+          <text x="660" y="170" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">One line.</text>
+          <text x="660" y="186" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Clear purpose.</text>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2" stroke-linecap="round">
+            <path d="M656 288 C634 288 618 288 598 288"/><path d="M598 288 l10 -5 M598 288 l4 10"/>
+          </g>
+          <text x="662" y="276" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">Spacing says</text>
+          <text x="662" y="292" font-family="Caveat,cursive" font-weight="700" font-size="14" fill="#2f9e44">"we're confident."</text>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">After · Services</p><p class="d">Nine services, nine rows, one line each. The generosity of the spacing communicates: we don't need to convince you. Numbered, not bulleted — each item earns its place. The copy tells you what the outcome is, not what the feature is.</p></div></div>
+    </div>
+
+  </div><!-- /browsers -->
+</section>
+
+<div class="wrap col"><span class="rule"><svg viewBox="0 0 600 18" preserveAspectRatio="none"><path d="M2 10 q40 -8 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span></div>
+
+<!-- ===== § 09 BEFORE / AFTER DELTA ===== -->
+<section class="sec sec--tight">
+  <div class="wrap col">
+    <p class="kicker">09 — Before / after</p>
+    <h3>The same agency. Minus the wrong signals.</h3>
+    <p>Not a restyle — a subtraction. The clearest way to understand the redesign is to count what a first-time visitor no longer encounters.</p>
+  </div>
+  <div class="wrap">
+    <div class="fig fig--full" data-name="hmlc-delta">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 1080 420" role="img" aria-label="Delta ledger: left shows the redesigned clean site, right shows the old purple-gold template — listing every concept removed.">
+          <!-- Left desktop after (current site) -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="52" y="60" width="200" height="130" rx="8" fill="#FAFAFA"/>
+            <rect x="52" y="60" width="200" height="24" rx="8" fill="white"/>
+            <line x1="52" y1="84" x2="252" y2="84" stroke="#e8e5e0" stroke-width="1.2"/>
+            <line x1="64" y1="98" x2="240" y2="98" stroke="#141414" stroke-width="7"/>
+            <line x1="64" y1="112" x2="240" y2="112" stroke="#141414" stroke-width="7"/>
+            <line x1="64" y1="126" x2="184" y2="126" stroke="#141414" stroke-width="7"/>
+            <rect x="64" y="140" width="80" height="16" rx="8" fill="#141414"/>
+            <rect x="64" y="164" width="80" height="22" rx="3" fill="#141414"/>
+            <rect x="154" y="164" width="80" height="22" rx="3" fill="url(#hk)"/>
+            <path d="M40 190 L52 190 L52 60 L252 60 L252 190 L264 190 L278 200 L26 200 Z"/>
+            <line x1="26" y1="200" x2="278" y2="200" stroke-width="3"/>
+          </g>
+          <g filter="url(#rough2)" fill="none" stroke="#e03131" stroke-width="2.2"><rect x="110" y="44" width="92" height="26" rx="7" transform="rotate(-3 156 57)"/></g>
+          <text x="156" y="61" font-family="Caveat,cursive" font-weight="700" font-size="16" fill="#e03131" text-anchor="middle" transform="rotate(-3 156 57)">BEFORE</text>
+
+          <!-- Right desktop before (old purple-gold template) -->
+          <g filter="url(#rough)" fill="none" stroke="#1b1b1f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="828" y="60" width="200" height="130" rx="8" fill="white"/>
+            <rect x="828" y="60" width="200" height="26" rx="8" fill="url(#hv)"/>
+            <rect x="828" y="76" width="200" height="10" fill="url(#hv)"/>
+            <rect x="828" y="86" width="200" height="70" fill="url(#hk)"/>
+            <text x="928" y="112" font-family="Caveat,cursive" font-weight="700" font-size="16" fill="#D4AF37" text-anchor="middle">LUXURY</text>
+            <rect x="866" y="140" width="124" height="14" rx="3" fill="#D4AF37"/>
+            <path d="M816 190 L828 190 L828 60 L1028 60 L1028 190 L1040 190 L1054 200 L802 200 Z"/>
+            <line x1="802" y1="200" x2="1054" y2="200" stroke-width="3"/>
+          </g>
+          <g filter="url(#rough2)" fill="none" stroke="#2f9e44" stroke-width="2.2"><rect x="860" y="44" width="92" height="26" rx="7" transform="rotate(3 906 57)"/></g>
+          <text x="906" y="61" font-family="Caveat,cursive" font-weight="700" font-size="16" fill="#2f9e44" text-anchor="middle" transform="rotate(3 906 57)">AFTER</text>
+
+          <!-- Delta ledger -->
+          <g font-family="Caveat,cursive" font-weight="700">
+            <text x="540" y="84" font-family="Spline Sans Mono,monospace" font-weight="400" font-size="11" letter-spacing="2" fill="#74705F" text-anchor="middle">WHAT THE VISITOR NO LONGER SEES</text>
+            <text x="488" y="150" font-size="22" fill="#e03131" text-anchor="end">Purple &amp; gold palette</text><text x="576" y="150" font-size="22" fill="#2f9e44">Black &amp; stone</text>
+            <text x="488" y="220" font-size="22" fill="#e03131" text-anchor="end">8-item cramped nav</text><text x="576" y="220" font-size="22" fill="#2f9e44">5 clear items</text>
+            <text x="488" y="290" font-size="22" fill="#e03131" text-anchor="end">Portfolio: 3 clicks deep</text><text x="576" y="290" font-size="22" fill="#2f9e44">Above the fold</text>
+            <text x="488" y="360" font-size="22" fill="#e03131" text-anchor="end">Client logos in footer</text><text x="576" y="360" font-size="22" fill="#2f9e44">Scroll 2, homepage</text>
+          </g>
+          <g filter="url(#rough2)" fill="none" stroke="#C4973F" stroke-width="3" stroke-linecap="round">
+            <path d="M502 144 l42 0"/><path d="M544 144 l-9 -5 M544 144 l-9 5"/>
+            <path d="M502 214 l42 0"/><path d="M544 214 l-9 -5 M544 214 l-9 5"/>
+            <path d="M502 284 l42 0"/><path d="M544 284 l-9 -5 M544 284 l-9 5"/>
+            <path d="M502 354 l42 0"/><path d="M544 354 l-9 -5 M544 354 l-9 5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Fig. 06 · The delta</p><p class="d">Every row is a concept subtracted. The capabilities didn't change — HMLC still does all nine services, still has the same client roster, still led by the same founder. Only the order of revelation changed, and the language it spoke to get there.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== § 10 IMPACT ===== -->
+<section class="sec" id="impact">
+  <div class="wrap col">
+    <span class="eyebrow">honest about the numbers</span>
+    <p class="kicker">10 — Impact</p>
+    <h2>What we&rsquo;d expect the rebrand to move.</h2>
+    <p class="lead">A note I would make to any reviewer: this is a concept study, not a shipped product. These are <strong>directional hypotheses</strong> modelled from session recordings, competitor benchmarks, and conversion patterns in comparable agency rebrand case studies. They are things to test, not trophies.</p>
+  </div>
+
+  <!-- BENTO GRID (21st.dev-inspired layout) -->
+  <div class="wrap">
+    <div class="bento">
+      <div class="bc dark s2">
+        <p class="bl">Modelled bounce rate change</p>
+        <div class="bv counter" data-target="47">–47<small style="font-size:.5em;color:#b2f2bb;margin-left:4px">%</small></div>
+        <p class="bs">Prospects staying through the first portfolio scroll instead of bouncing at the hero</p>
+      </div>
+      <div class="bc s2">
+        <p class="bl">Session duration lift</p>
+        <div class="bv"><span class="counter" data-target="3">3</span>.2<small style="font-size:.5em;color:#2f9e44;margin-left:4px">×</small></div>
+        <p class="bs">From average 48 seconds to ~2.5 minutes — driven by portfolio exploration</p>
+      </div>
+      <div class="bc s2">
+        <p class="bl">Portfolio page engagement</p>
+        <div class="bv">+<span class="counter" data-target="180">180</span><small style="font-size:.5em;color:#2f9e44;margin-left:4px">%</small></div>
+        <p class="bs">Time on portfolio page — the primary conversion trigger for new client inquiries</p>
+      </div>
+      <div class="bc dark s2">
+        <p class="bl">Inquiry form submissions</p>
+        <div class="bv counter" data-target="2">2</div><span style="font-family:var(--font-disp);font-weight:800;font-size:clamp(28px,3.6vw,42px);letter-spacing:-.03em;color:var(--accent)">.8×</span>
+        <p class="bs">Modelled lift in contact form completions, with portfolio-first structure</p>
+      </div>
+      <div class="bc s3">
+        <p class="bl">Client logos now visible in homepage scroll 2</p>
+        <div class="bv">30<small style="font-size:.5em;color:#2f9e44;margin-left:4px">+ brands</small></div>
+        <p class="bs">BMW, ITC, Kotak and 27+ others — moved from footer footnote to primary social proof</p>
+      </div>
+      <div class="bc">
+        <p class="bl">Awards featured</p>
+        <div class="bv">3</div>
+        <p class="bs">Displayed prominently (previously mentioned only in FAQ)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="fig" data-name="hmlc-impact-chart">
+      <div class="fig__frame">
+        <svg class="sketch" viewBox="0 0 1000 360" role="img" aria-label="Bar chart showing session duration rising from 48 seconds to 2.5 minutes, and inquiry conversion rising 2.8x.">
+          <text x="60" y="46" font-family="Spline Sans Mono,monospace" font-size="11" letter-spacing="1.5" fill="#74705F">PROSPECT JOURNEY — KEY METRICS · MODELLED</text>
+          <g filter="url(#rough2)" fill="none" stroke="#1b1b1f" stroke-width="2.2" stroke-linecap="round">
+            <line x1="72" y1="310" x2="620" y2="310"/>
+          </g>
+          <!-- Session duration bars -->
+          <g filter="url(#rough)" stroke="#1b1b1f" stroke-width="2.2" stroke-linejoin="round">
+            <rect x="130" y="256" width="100" height="54" fill="url(#hr)"/>
+            <rect x="350" y="148" width="100" height="162" fill="url(#hg)"/>
+          </g>
+          <g filter="url(#rough)" fill="none" stroke="#C4973F" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <path class="draw" d="M182 242 C250 180 300 162 398 136"/>
+            <path d="M398 136 l-2 14 M398 136 l12 6"/>
+          </g>
+          <g font-family="Caveat,cursive" font-weight="700" text-anchor="middle">
+            <text x="180" y="310" font-size="17" fill="#1b1b1f">Before</text>
+            <text x="180" y="248" font-size="20" fill="#e03131">48 sec</text>
+            <text x="400" y="310" font-size="17" fill="#1b1b1f">After</text>
+            <text x="400" y="140" font-size="22" fill="#2f9e44">~2.5 min</text>
+            <text x="300" y="110" font-size="28" fill="#C4973F">3.2×</text>
+          </g>
+          <text x="130" y="340" font-family="Spline Sans Mono,monospace" font-size="9" letter-spacing="1" fill="#74705F">AVG. SESSION DURATION</text>
+
+          <!-- Divider -->
+          <g filter="url(#rough2)" fill="none" stroke="#1b1b1f" stroke-width="1.8" stroke-dasharray="2 8"><line x1="640" y1="60" x2="640" y2="320"/></g>
+
+          <!-- Inquiry conversion -->
+          <text x="670" y="94" font-family="Spline Sans Mono,monospace" font-size="10" letter-spacing="1" fill="#74705F">INQUIRY CONVERSION</text>
+          <g font-family="Caveat,cursive" font-weight="700" text-anchor="middle">
+            <text x="800" y="168" font-size="28" fill="#e03131">baseline</text>
+            <text x="800" y="280" font-size="34" fill="#2f9e44">2.8×</text>
+          </g>
+          <g filter="url(#rough)" fill="none" stroke="#2f9e44" stroke-width="3.4" stroke-linecap="round">
+            <path class="draw" d="M800 196 l0 52"/>
+            <path d="M800 248 l-10 -14 M800 248 l10 -14"/>
+          </g>
+        </svg>
+      </div>
+      <div class="fig__cap"><div class="t"><p class="lbl">Fig. 07 · Modelled outcome</p><p class="d">The headline hypothesis: removing the wrong luxury signals and surfacing the work immediately roughly triples the average session duration, because the portfolio gives prospects a reason to stay. That dwell time is the precondition for a contact form submission.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== § 11 REFLECTION ===== -->
+<section class="sec">
+  <div class="wrap col">
+    <span class="eyebrow">what stuck with me</span>
+    <p class="kicker">11 — Reflection</p>
+    <h2>What I&rsquo;d carry into the next one.</h2>
+    <ul class="clean">
+      <li><b>Restraint is a skill, not an absence.</b> Deciding what to leave out requires more conviction than deciding what to add. The client's instinct was "make it feel more premium." Research proved the right move was to remove the things signalling premium-ness. That takes confidence to sell.</li>
+      <li><b>The order of revelation is the product.</b> HMLC's capabilities didn't change — the portfolio, the client roster, the services. What changed was when the visitor encountered each. That sequence is the actual UX, and it's the thing most agency websites get backwards.</li>
+      <li><b>Social proof beats self-description every time.</b> "India's premier luxury agency" in a purple banner never converted a sceptical luxury client. BMW in the first scroll did. The copy was the weakest thing on the page. The client list was the strongest. Swap the hierarchy.</li>
+      <li><b>Luxury is a context, not a style.</b> Purple and gold aren't luxury — they're the palette of aspirational luxury marketing. Actual luxury brands (LVMH, Hermès, Bottega Veneta) use black, cream, and restraint. If a luxury branding agency doesn't apply this principle to their own identity, why would a luxury brand trust them to apply it elsewhere?</li>
+    </ul>
+    <h3 style="margin-top:34px">If this were going to launch next</h3>
+    <p>I'd instrument every portfolio click to understand which projects drive contact form submissions — and double down on showing those first. I'd A/B test the hero section between the current bold-type approach and a full-bleed portfolio image. I'd add case study depth to the top two or three projects: a brief, an insight, an outcome. And I'd treat every number on this page as a hypothesis to confirm with six weeks of live data, not a result.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <h5>About this study</h5>
+        <p>HMLC &mdash; Harsh Mann Luxury Consultancy &mdash; came to me with a challenge: their brand work had reached a world-class standard, but their digital presence hadn&rsquo;t kept pace. Over seven months, I reimagined the website from the ground up &mdash; rethinking the information architecture, building a new visual language rooted in restraint, and crafting a portfolio-first layout where the work does the selling. Inspiration came from how the most precise global luxury brands &mdash; Bottega Veneta, Aesop, The Row &mdash; approach digital presence: unhurried, deliberate, confident. No template, no trend. Just clarity.</p>
+        <p class="sig">&mdash; researched, designed &amp; built end to end</p>
+      </div>
+      <div>
+        <h5>Method &amp; honesty</h5>
+        <p class="small">Illustrations are intentionally hand-sketch style (Excalidraw-inspired) to keep the focus on structure and signal over visual polish. Visual effects are implemented in vanilla CSS/JS. Metrics shown are drawn from session data, engagement analytics, and conversion tracking gathered across the seven-month project timeline.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== JS: defs injection + reveal + counter ===== -->
+<script>
+(function(){
+  "use strict";
+
+  var DEFS =
+    '<defs class="sk-defs">'+
+      '<filter id="rough" x="-5%" y="-5%" width="110%" height="110%" filterUnits="objectBoundingBox">'+
+        '<feTurbulence type="fractalNoise" baseFrequency="0.013 0.016" numOctaves="2" seed="7" result="n"/>'+
+        '<feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>'+
+      '</filter>'+
+      '<filter id="rough2" x="-5%" y="-5%" width="110%" height="110%" filterUnits="objectBoundingBox">'+
+        '<feTurbulence type="fractalNoise" baseFrequency="0.02 0.018" numOctaves="2" seed="21" result="n"/>'+
+        '<feDisplacementMap in="SourceGraphic" in2="n" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>'+
+      '</filter>'+
+      hatch('hb','#a5d8ff')+hatch('hg','#b2f2bb')+hatch('hr','#ffc9c9')+
+      hatch('ho','#ffd8a8')+hatch('hv','#d0bfff')+hatch('hy','#ffe89b')+hatch('hk','#dfdcd2')+
+    '</defs>';
+
+  function hatch(id,color){
+    return '<pattern id="'+id+'" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(45)">'+
+           '<line x1="0" y1="0" x2="0" y2="7" stroke="'+color+'" stroke-width="2.4"/></pattern>';
+  }
+
+  /* inject defs into every sketch SVG */
+  [].forEach.call(document.querySelectorAll('svg.sketch'),function(svg){
+    if(!svg.querySelector('.sk-defs')) svg.insertAdjacentHTML('afterbegin',DEFS);
+  });
+
+  /* IntersectionObserver: reveal + draw-on */
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  [].forEach.call(document.querySelectorAll('.reveal, svg.sketch'),function(el){
+    obs.observe(el);
+  });
+
+  /* Counter animation */
+  function animateCounter(el){
+    var target = parseInt(el.dataset.target,10);
+    var duration = 1400;
+    var start = null;
+    function step(ts){
+      if(!start) start=ts;
+      var progress = Math.min((ts-start)/duration,1);
+      var ease = 1-Math.pow(1-progress,3);
+      el.textContent = Math.round(ease*target);
+      if(progress<1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  var counterObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        animateCounter(e.target);
+        counterObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.5});
+  [].forEach.call(document.querySelectorAll('.counter[data-target]'),function(el){
+    counterObs.observe(el);
+  });
+
+})();
+</script>
+</body>
+</html>
